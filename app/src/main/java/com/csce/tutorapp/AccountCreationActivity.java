@@ -230,8 +230,7 @@ public class AccountCreationActivity extends AppCompatActivity implements Google
 
                 if (task.isSuccessful())
                 {
-                    //@TODO: start the home page or next activity
-                    finish();
+                    handleSuccessfulAuth();
                 }
             }
         });
@@ -254,8 +253,7 @@ public class AccountCreationActivity extends AppCompatActivity implements Google
 
                         if (task.isSuccessful())
                         {
-                            //@TODO: start the home page or next activity
-                            finish();
+                            handleSuccessfulAuth();
                         }
                     }
                 });
@@ -274,10 +272,18 @@ public class AccountCreationActivity extends AppCompatActivity implements Google
 
                         if (task.isSuccessful())
                         {
-                            //@TODO: start the home page or next activity
-                            finish();
+                            handleSuccessfulAuth();
                         }
                     }
                 });
+    }
+
+    /* handle a successful Firebase authentication */
+    private void handleSuccessfulAuth(){
+        //@TODO: start the home page or next activity
+        User testUser = new User(FirebaseUtility.getCurrentFirebaseUser().getUid());
+        testUser.updateProfile("Test First Name", "Test Last Name", "testemail@email.com");
+        FirebaseUtility.updateUser(testUser);
+        finish();
     }
 }

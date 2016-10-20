@@ -9,6 +9,8 @@ import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 /**
  * Created by willh on 10/17/2016.
@@ -53,5 +55,13 @@ public class FirebaseUtility {
         }
 
         return resultTask;
+    }
+
+    /* adds or updates the User profile to the Firebase database */
+    public static void updateUser(User userProfile){
+        DatabaseReference firebaseDatabase = FirebaseDatabase.getInstance().getReference();
+
+        //pushes the User object into the database
+        firebaseDatabase.child("users").child(userProfile.getID()).child("profile").setValue(userProfile);
     }
 }
