@@ -37,4 +37,9 @@
     <string name="fb_signin_msg">Register with Facebook</string>
     <string name="google_signin_msg">Register with Google</string>
 
+    <!-- Find tutor strings -->
+    <string name="institution_name">Institution</string>
+    <string name="subject_name">Subjects</string>
+    <string name="firebase_URL">https://tutoring-app-e2bdd.firebaseio.com/</string>
+
 </resources>

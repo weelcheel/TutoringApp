@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_find_tutor"
     android:layout_width="match_parent"
@@ -10,4 +12,21 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.csce.tutorapp.FindTutorActivity">
 
+    <MultiAutoCompleteTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/institution_name"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:id="@id/mactv_institutions"
+        tools:ignore="LabelFor" />
+
+    <MultiAutoCompleteTextView
+        android:text="MultiAutoCompleteTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/mactv_institutions"
+        android:layout_alignParentStart="true"
+        android:id="@+id/multiAutoCompleteTextView3"
+        android:layout_alignParentEnd="true" />
 </RelativeLayout>

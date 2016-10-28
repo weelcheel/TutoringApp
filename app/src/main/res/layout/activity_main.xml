@@ -81,7 +81,8 @@
             android:text="@string/btn_link_to_login"
             android:textAllCaps="false"
             android:textColor="@color/white"
-            android:textSize="15dp" />
+            android:textSize="15dp"
+            android:onClick="startFindTutorActivity"/>
     </LinearLayout>
 
     <ProgressBar

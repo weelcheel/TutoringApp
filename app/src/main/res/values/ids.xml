@@ -1,2 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <item name="mactv_institutions" type="id">Institutions</item>
+    <item name="mactv_courses" type="id">Courses</item>
+</resources>
