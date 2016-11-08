@@ -12,6 +12,8 @@ import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.Map;
+
 /**
  * Created by willh on 10/17/2016.
  *
@@ -58,10 +60,10 @@ public class FirebaseUtility {
     }
 
     /* adds or updates the User profile to the Firebase database */
-    public static void updateUser(User userProfile){
+    public static void updateUser(Map<String, User> userMap, String uid){
         DatabaseReference firebaseDatabase = FirebaseDatabase.getInstance().getReference();
 
         //pushes the User object into the database
-        firebaseDatabase.child("users").child(userProfile.getID()).child("profile").setValue(userProfile);
+        firebaseDatabase.child("users").child(uid).setValue(userMap);
     }
 }
