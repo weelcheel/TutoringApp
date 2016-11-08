@@ -138,7 +138,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         signInBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                finish();
+                Intent createAccountIntent = new Intent(LoginActivity.this, AccountCreationActivity.class);
+                startActivity(createAccountIntent);
             }
         });
 
@@ -283,7 +284,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     /* handle a successful Firebase authentication */
     private void handleSuccessfulAuth(){
         //check to see if we should login or go to profile create screen
-        final DatabaseReference userProfileDb = FirebaseDatabase.getInstance().getReference("users").child(FirebaseUtility.getCurrentFirebaseUser().getUid()).child(FirebaseUtility.getCurrentFirebaseUser().getUid());
+        final DatabaseReference userProfileDb = FirebaseDatabase.getInstance().getReference("users").child(FirebaseUtility.getCurrentFirebaseUser().getUid());
         userProfileDb.addListenerForSingleValueEvent(new ValueEventListener(){
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -293,19 +294,33 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 if (value != null)
                 {
                     Log.d("profile", "Value is: " + value.getEmail());
-                    if (value.IsProfileCreated())
+                    if (value.getIsProfileCreated())
                     {
                         //switch to homescreen
-                        //Intent homescreenIntent = new Intent(this, homescreenActivity);
-
+                        Intent homescreenIntent = new Intent(LoginActivity.this, HomeActivity.class);
+                        homescreenIntent.putExtra(FirebaseUtility.INTENT_USER_PATH, value);
+                        startActivity(homescreenIntent);
                         finish();
                     }
                     else
                     {
                         Intent userprofileIntent = new Intent(LoginActivity.this, UserProfileActivity.class);
+                        userprofileIntent.putExtra(FirebaseUtility.INTENT_USER_PATH, value);
                         startActivity(userprofileIntent);
                         finish();
                     }
+                }
+                else
+                {
+                    User newUser = new User(FirebaseUtility.getCurrentFirebaseUser().getUid());
+                    //HashMap<String, User> userMap = new HashMap<>();
+                    //userMap.put(newUser.getID(), newUser);
+                    FirebaseUtility.updateUser(newUser);
+
+                    Intent userprofileIntent = new Intent(LoginActivity.this, UserProfileActivity.class);
+                    userprofileIntent.putExtra(FirebaseUtility.INTENT_USER_PATH, newUser);
+                    startActivity(userprofileIntent);
+                    finish();
                 }
             }
 

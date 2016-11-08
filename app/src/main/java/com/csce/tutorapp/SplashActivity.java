@@ -19,6 +19,9 @@ public class SplashActivity extends AppCompatActivity {
         if (FirebaseUtility.getCurrentFirebaseUser() != null)
         {
             //already logged in, so just head to the home screen
+            Intent homescreenIntent = new Intent(this, HomeActivity.class);
+            startActivity(homescreenIntent);
+            finish();
         }
         else
         {

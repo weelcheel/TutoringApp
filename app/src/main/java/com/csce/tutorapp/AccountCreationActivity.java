@@ -107,7 +107,8 @@ public class AccountCreationActivity extends AppCompatActivity implements Google
         signInBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                finish();
+                Intent loginIntent = new Intent(AccountCreationActivity.this, LoginActivity.class);
+                startActivity(loginIntent);
             }
         });
 
@@ -127,7 +128,7 @@ public class AccountCreationActivity extends AppCompatActivity implements Google
                     Toast.makeText(getApplicationContext(), "Email or password field cannot be blank!", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (password != confirmPwd)
+                if (!TextUtils.equals(password, confirmPwd))
                 {
                     Toast.makeText(getApplicationContext(), "Password and confirmed password must match!", Toast.LENGTH_SHORT).show();
                     return;
@@ -258,12 +259,12 @@ public class AccountCreationActivity extends AppCompatActivity implements Google
     /* handle a successful Firebase authentication */
     private void handleSuccessfulAuth(){
         User newUser = new User(FirebaseUtility.getCurrentFirebaseUser().getUid());
-        HashMap<String, User> userMap = new HashMap<>();
-        userMap.put(newUser.getID(), newUser);
-        FirebaseUtility.updateUser(userMap, newUser.getID());
+        //HashMap<String, User> userMap = new HashMap<>();
+        //userMap.put(newUser.getID(), newUser);
+        FirebaseUtility.updateUser(newUser);
 
         //check to see if we should login or go to profile create screen
-        final DatabaseReference userProfileDb = FirebaseDatabase.getInstance().getReference("users").child(FirebaseUtility.getCurrentFirebaseUser().getUid()).child(FirebaseUtility.getCurrentFirebaseUser().getUid());
+        final DatabaseReference userProfileDb = FirebaseDatabase.getInstance().getReference("users").child(FirebaseUtility.getCurrentFirebaseUser().getUid());
         userProfileDb.addListenerForSingleValueEvent(new ValueEventListener(){
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -273,16 +274,18 @@ public class AccountCreationActivity extends AppCompatActivity implements Google
                 if (value != null)
                 {
                     Log.d("profile", "Value is: " + value.getEmail());
-                    if (value.IsProfileCreated())
+                    if (value.getIsProfileCreated())
                     {
                         //switch to homescreen
-                        //Intent homescreenIntent = new Intent(this, homescreenActivity);
-
+                        Intent homescreenIntent = new Intent(AccountCreationActivity.this, HomeActivity.class);
+                        homescreenIntent.putExtra(FirebaseUtility.INTENT_USER_PATH, value);
+                        startActivity(homescreenIntent);
                         finish();
                     }
                     else
                     {
                         Intent userprofileIntent = new Intent(AccountCreationActivity.this, UserProfileActivity.class);
+                        userprofileIntent.putExtra(FirebaseUtility.INTENT_USER_PATH, value);
                         startActivity(userprofileIntent);
                         finish();
                     }

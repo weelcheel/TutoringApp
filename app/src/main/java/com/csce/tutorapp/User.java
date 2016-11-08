@@ -1,5 +1,8 @@
 package com.csce.tutorapp;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
@@ -11,7 +14,7 @@ import java.util.StringTokenizer;
  *
  */
 
-public class User {
+public class User implements Parcelable {
 
     /* user information variables */
     private String id; //same UID that Firebase assigns users
@@ -30,6 +33,9 @@ public class User {
 
     /* whether or not this account has been initialized (user has or hasn't created their profile)*/
     private boolean isProfileCreated;
+
+    /* shouldn't be used except by Firebase */
+    public User(){}
 
     /* construct a new User object from a Firebase id */
     public User(String uid){
@@ -90,7 +96,7 @@ public class User {
 
     public ArrayList<String> getConversationIDs() { return conversationIDs; }
 
-    public boolean IsProfileCreated() { return isProfileCreated; }
+    public boolean getIsProfileCreated() {return isProfileCreated; }
 
     /* update user profile minimum*/
     public void updateProfile(String fName, String lName, String actType){
@@ -113,4 +119,38 @@ public class User {
         studentSubjects = stuSubjects;
         tutorSubjects = tutrSubjects;
     }
+
+    //-------------PARCEL INTERFACE-----------------
+    public User(Parcel in){
+        id = in.readString();
+        firstName = in.readString();
+        lastName = in.readString();
+        email = in.readString();
+        accountType = in.readString();
+    }
+
+    public void writeToParcel(Parcel out, int flags)
+    {
+        out.writeString(id);
+        out.writeString(firstName);
+        out.writeString(lastName);
+        out.writeString(email);
+        out.writeString(accountType);
+    }
+
+    public int describeContents()
+    {
+        return 0;
+    }
+
+    public static final Parcelable.Creator<User> CREATOR
+            = new Parcelable.Creator<User>(){
+        public User createFromParcel(Parcel in){
+            return new User(in);
+        }
+
+        public User[] newArray(int size){
+            return new User[size];
+        }
+    };
 }

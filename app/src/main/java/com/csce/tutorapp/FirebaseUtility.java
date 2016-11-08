@@ -22,6 +22,9 @@ import java.util.Map;
  */
 
 public class FirebaseUtility {
+
+    /* string that is pathed to user accounts in Intent bundles */
+    public final static String INTENT_USER_PATH = "com.csce.tutorapp.USER";
     
     /* gets the current Firebase Authenticator */
     public static FirebaseAuth getAuthenticator(){
@@ -60,10 +63,10 @@ public class FirebaseUtility {
     }
 
     /* adds or updates the User profile to the Firebase database */
-    public static void updateUser(Map<String, User> userMap, String uid){
-        DatabaseReference firebaseDatabase = FirebaseDatabase.getInstance().getReference();
+    public static void updateUser(User savedUser){
+        DatabaseReference firebaseDatabase = FirebaseDatabase.getInstance().getReference("users");
 
         //pushes the User object into the database
-        firebaseDatabase.child("users").child(uid).setValue(userMap);
+        firebaseDatabase.child(savedUser.getID()).setValue(savedUser);
     }
 }
