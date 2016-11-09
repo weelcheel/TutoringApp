@@ -12,6 +12,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <TextView
+            android:text="TextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/profileName"
+            android:layout_marginBottom="500dp"
+            android:textAppearance="@android:style/TextAppearance.Material.Title"
+            android:gravity="center" />
+
         <Button
             android:text="@string/btn_sign_out"
             android:layout_width="match_parent"
