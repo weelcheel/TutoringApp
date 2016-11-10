@@ -22,7 +22,7 @@ import com.google.firebase.database.ValueEventListener;
 public class HomeActivity extends AppCompatActivity {
 
     /* signout button component */
-    private Button signoutButton;
+    private Button signoutButton, testConvoBtn;
 
     /* profile name */
     private TextView profileName;
@@ -38,6 +38,7 @@ public class HomeActivity extends AppCompatActivity {
         //assign button
         signoutButton = (Button) findViewById(R.id.signoutBtn);
         profileName = (TextView) findViewById(R.id.profileName);
+        testConvoBtn = (Button) findViewById(R.id.testConvo);
 
         //set button text based on sign in status
         if (FirebaseUtility.getCurrentFirebaseUser() == null)
@@ -53,6 +54,15 @@ public class HomeActivity extends AppCompatActivity {
                 Intent loginScreenIntent = new Intent(HomeActivity.this, LoginActivity.class);
                 startActivity(loginScreenIntent);
                 finish();
+            }
+        });
+
+        //go to test conversation
+        testConvoBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent convo = new Intent(HomeActivity.this, TestConversationActivity.class);
+                startActivity(convo);
             }
         });
 
