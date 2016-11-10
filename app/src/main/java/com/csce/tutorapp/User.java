@@ -35,7 +35,11 @@ public class User implements Parcelable {
     private boolean isProfileCreated;
 
     /* shouldn't be used except by Firebase */
-    public User(){}
+    public User(){
+        studentSubjects = new ArrayList<>();
+        tutorSubjects = new ArrayList<>();
+        conversationIDs = new ArrayList<>();
+    }
 
     /* construct a new User object from a Firebase id */
     public User(String uid){
@@ -48,6 +52,7 @@ public class User implements Parcelable {
 
         studentSubjects = new ArrayList<>();
         tutorSubjects = new ArrayList<>();
+        conversationIDs = new ArrayList<>();
         studentSubjects.add("test");
         tutorSubjects.add("tutorTest");
 

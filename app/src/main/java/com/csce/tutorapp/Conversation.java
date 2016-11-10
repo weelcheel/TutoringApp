@@ -32,12 +32,26 @@ class ConversationMessage{
 public class Conversation {
     private String otherUserID;
     private ArrayList<ConversationMessage> messages;
+    private String convoName;
+    private String convoID;
 
     public Conversation(){
         otherUserID = "test";
+        messages = new ArrayList<>();
+        convoName = "Name";
+        convoID = "test";
+    }
+
+    public Conversation(String otherID, String cName, String cID){
+        otherUserID = otherID;
+        convoName = cName;
+        convoID = cID;
         messages = new ArrayList<>();
     }
 
     public String getOtherUserID() { return otherUserID; }
     public ArrayList<ConversationMessage> getMessages() { return messages; }
+    public String getConvoName() { return convoName; }
+    public String getConvoID() { return convoID; }
+    public String toString() { return getConvoName(); }
 }

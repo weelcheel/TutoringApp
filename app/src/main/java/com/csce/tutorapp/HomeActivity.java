@@ -61,7 +61,7 @@ public class HomeActivity extends AppCompatActivity {
         testConvoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent convo = new Intent(HomeActivity.this, TestConversationActivity.class);
+                Intent convo = new Intent(HomeActivity.this, ConversationListActivity.class);
                 startActivity(convo);
             }
         });

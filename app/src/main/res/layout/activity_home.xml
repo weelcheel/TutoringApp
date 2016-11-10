@@ -27,7 +27,7 @@
             android:layout_weight="80" />
 
         <Button
-            android:text="Test Conversation"
+            android:text="Conversations"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/testConvo" />

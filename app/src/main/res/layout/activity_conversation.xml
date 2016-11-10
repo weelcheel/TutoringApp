@@ -4,7 +4,7 @@
     android:id="@+id/activity_test_conversation"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.csce.tutorapp.TestConversationActivity">
+    tools:context="com.csce.tutorapp.ConversationActivity">
 
     <LinearLayout
         android:orientation="vertical"
@@ -18,14 +18,14 @@
             android:id="@+id/convoList"
             android:layout_height="wrap_content"
             android:layout_gravity="fill_vertical"
-            android:layout_weight="80" />
+            android:layout_weight="95" />
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="59dp"
             android:weightSum="1"
-            android:layout_weight="20">
+            android:layout_weight="5">
 
             <MultiAutoCompleteTextView
                 android:layout_width="0dp"
