@@ -31,6 +31,7 @@ class ConversationMessage{
 
 public class Conversation {
     private String otherUserID;
+    private String authorID;
     private ArrayList<ConversationMessage> messages;
     private String convoName;
     private String convoID;
@@ -42,10 +43,11 @@ public class Conversation {
         convoID = "test";
     }
 
-    public Conversation(String otherID, String cName, String cID){
+    public Conversation(String otherID, String cName, String cID, String aID){
         otherUserID = otherID;
         convoName = cName;
         convoID = cID;
+        authorID = aID;
         messages = new ArrayList<>();
     }
 
@@ -53,5 +55,6 @@ public class Conversation {
     public ArrayList<ConversationMessage> getMessages() { return messages; }
     public String getConvoName() { return convoName; }
     public String getConvoID() { return convoID; }
+    public String getAuthorID() { return authorID; }
     public String toString() { return getConvoName(); }
 }

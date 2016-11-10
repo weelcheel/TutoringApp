@@ -61,7 +61,7 @@
             android:label="@string/title_activity_home"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ConversationActivity" />
-        <activity android:name=".ConversationListActivity"></activity>
+        <activity android:name=".ConversationListActivity" />
     </application>
 
 </manifest>
