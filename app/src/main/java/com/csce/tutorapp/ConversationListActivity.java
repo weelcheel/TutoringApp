@@ -144,6 +144,7 @@ public class ConversationListActivity extends AppCompatActivity {
                                             User remoteUser = child.getValue(User.class);
 
                                             //create the conversation
+                                            Conversation newConversation = new Conversation(remoteUser.getID(), nameinput.getText().toString(), convoID, FirebaseUtility.getCurrentFirebaseUser().getUid());
                                             FirebaseDatabase.getInstance().getReference("conversations").child(convoID).setValue(newConversation);
 
                                             //now add this id to both users
