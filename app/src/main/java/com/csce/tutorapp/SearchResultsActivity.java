@@ -43,5 +43,28 @@ public class SearchResultsActivity extends AppCompatActivity{
         homeBtn = (Button) findViewById(R.id.home_button);
         newSearchBtn = (Button) findViewById(R.id.new_search_button);
         tutorList = (ListView) findViewById(R.id.tutor_list);
+
+        createButtonListeners();
+    }
+
+    private void createButtonListeners ()
+    {
+        homeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                //TODO: Switch to home activity
+                Intent i = new Intent(getApplicationContext(), HomeScreenActivity.class);
+                startActivity(i);
+            }
+        });
+
+        newSearchBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                //TODO: Switch to find tutor activity
+                Intent i = new Intent(getApplicationContext(), FindTutorActivity.class);
+                startActivity(i);
+            }
+        });
     }
 }

@@ -33,7 +33,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 
 public class HomeScreenActivity extends AppCompatActivity {
 
-    private Button findTutorBtn, profileBtn, logoutBtn;
+    private Button findTutorBtn, profileBtn, messagesBtn, logoutBtn;
     private ImageView profilePicture;
 
     @Override
@@ -43,8 +43,45 @@ public class HomeScreenActivity extends AppCompatActivity {
         setContentView(R.layout.home_screen_activity);
         findTutorBtn = (Button) findViewById(R.id.find_tutor_button);
         profileBtn = (Button) findViewById(R.id.profile_button);
+        messagesBtn = (Button) findViewById(R.id.messages_button);
         logoutBtn = (Button) findViewById(R.id.logout_button);
         profilePicture = (ImageView) findViewById(R.id.profile_picture);
 
+        createButtonListeners();
+    }
+
+    private void createButtonListeners ()
+    {
+        findTutorBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                //TODO: Switch to find tutor activity
+                Intent i = new Intent(getApplicationContext(), FindTutorActivity.class);
+                startActivity(i);
+            }
+        });
+
+        profileBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                //TODO: Switch to profile activity
+                Intent i = new Intent(getApplicationContext(), ProfileActivity.class);
+                startActivity(i);
+            }
+        });
+        
+        messagesBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                //TODO: Switch to messages
+            }
+        });
+
+        logoutBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                //TODO: logout
+            }
+        });
     }
 }

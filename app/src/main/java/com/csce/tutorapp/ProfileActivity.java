@@ -52,6 +52,25 @@ public class ProfileActivity extends AppCompatActivity{
         studentRating = (RatingBar) findViewById(R.id.student_rating_bar);
         tutorRating = (RatingBar) findViewById(R.id.tutor_rating_bar);
 
+        createButtonListeners();
+    }
 
+    private void createButtonListeners ()
+    {
+        homeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                //TODO: Switch to home activity
+                Intent i = new Intent(getApplicationContext(), HomeScreenActivity.class);
+                startActivity(i);
+            }
+        });
+
+        editBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                //TODO: switch to edit screen
+            }
+        });
     }
 }

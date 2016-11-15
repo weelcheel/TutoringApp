@@ -1,5 +1,6 @@
 package com.csce.tutorapp;
 
+import android.content.SearchRecentSuggestionsProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
@@ -49,6 +50,27 @@ public class FindTutorActivity extends AppCompatActivity {
         searchSubject = (EditText) findViewById(R.id.subject_text_box);
         restrictInstitution = (CheckBox) findViewById(R.id.restrict_institution_box);
 
+        createButtonListeners();
+    }
 
+    private void createButtonListeners ()
+    {
+        cancelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                //TODO: Switch to home activity
+                Intent i = new Intent(getApplicationContext(), HomeScreenActivity.class);
+                startActivity(i);
+            }
+        });
+
+        searchBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                //TODO: Switch to search results activity
+                Intent i = new Intent(getApplicationContext(), SearchResultsActivity.class);
+                startActivity(i);
+            }
+        });
     }
 }

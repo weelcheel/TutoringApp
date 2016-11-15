@@ -53,6 +53,34 @@ public class ViewTutorActivity extends AppCompatActivity {
         studentRating = (RatingBar) findViewById(R.id.student_rating_bar);
         tutorRating = (RatingBar) findViewById(R.id.tutor_rating_bar);
 
+        createButtonListeners();
+    }
 
+    private void createButtonListeners ()
+    {
+        homeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                //TODO: Switch to home activity
+                Intent i = new Intent(getApplicationContext(), HomeScreenActivity.class);
+                startActivity(i);
+            }
+        });
+
+        returnBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                //TODO: Switch to search results activity
+                Intent i = new Intent(getApplicationContext(), SearchResultsActivity.class);
+                startActivity(i);
+            }
+        });
+
+        contactBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                //TODO: move to messaging system
+            }
+        });
     }
 }
