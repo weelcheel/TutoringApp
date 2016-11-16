@@ -62,6 +62,9 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ConversationActivity" />
         <activity android:name=".ConversationListActivity" />
+        <activity android:name=".ProfileActivity"/>
+        <activity android:name=".FindTutorActivity"/>
+        <activity android:name=".SearchResultsActivity"/>
     </application>
 
 </manifest>
