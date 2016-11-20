@@ -2,10 +2,7 @@ package com.csce.tutorapp;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -22,7 +19,8 @@ import com.google.firebase.database.ValueEventListener;
 public class HomeActivity extends AppCompatActivity {
 
     /* signout button component */
-    private Button signoutButton, testConvoBtn;
+    private Button signoutButton, conversationsBtn,
+            findTutorBtn, profileBtn;
 
     /* profile name */
     private TextView profileName;
@@ -33,16 +31,17 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.home_screen_activity);
 
         //assign button
-        signoutButton = (Button) findViewById(R.id.signoutBtn);
+        signoutButton = (Button) findViewById(R.id.logout_button);
         profileName = (TextView) findViewById(R.id.profileName);
-        testConvoBtn = (Button) findViewById(R.id.testConvo);
+        conversationsBtn = (Button) findViewById(R.id.convo_button);
+        findTutorBtn = (Button) findViewById(R.id.find_tutor_button);
+        profileBtn = (Button) findViewById(R.id.profile_button);
 
-        //set button text based on sign in status
-        if (FirebaseUtility.getCurrentFirebaseUser() == null)
-            signoutButton.setText(getResources().getString(R.string.action_sign_in_short));
+        //hide the profile name until set
+        profileName.setVisibility(View.INVISIBLE);
 
         //event listener for button
         signoutButton.setOnClickListener(new View.OnClickListener() {
@@ -58,13 +57,32 @@ public class HomeActivity extends AppCompatActivity {
         });
 
         //go to test conversation
-        testConvoBtn.setOnClickListener(new View.OnClickListener() {
+        conversationsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent convo = new Intent(HomeActivity.this, ConversationListActivity.class);
                 startActivity(convo);
             }
         });
+
+        findTutorBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                //TODO: Switch to find tutor activity
+                Intent i = new Intent(getApplicationContext(), FindTutorActivity.class);
+                startActivity(i);
+            }
+        });
+
+        profileBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                //TODO: Switch to profile activity
+                Intent i = new Intent(getApplicationContext(), ProfileActivity.class);
+                startActivity(i);
+            }
+        });
+
 
         final DatabaseReference userProfileDb = FirebaseDatabase.getInstance().getReference("users").child(FirebaseUtility.getCurrentFirebaseUser().getUid());
         userProfileDb.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -77,7 +95,8 @@ public class HomeActivity extends AppCompatActivity {
                     Log.d("profile", "Value is: " + signedInUser.getEmail());
                     if (signedInUser.getIsProfileCreated()) {
                         //populate home screen here
-                        profileName.setText(signedInUser.getFirstName() + " " + signedInUser.getLastName());
+                        profileName.setText(getString(R.string.home_welcome) + signedInUser.getFirstName() + " " + signedInUser.getLastName());
+                        profileName.setVisibility(View.VISIBLE);
                     } else {
                         Intent userprofileIntent = new Intent(HomeActivity.this, UserProfileActivity.class);
                         userprofileIntent.putExtra(FirebaseUtility.INTENT_USER_PATH, signedInUser);

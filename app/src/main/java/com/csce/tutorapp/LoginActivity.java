@@ -108,6 +108,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         fbCallbackManager = CallbackManager.Factory.create();
         fbSignUpBtn.setReadPermissions("email", "public_profile");
 
+        printKeyHash();
+
         //just so onCreate doesn't become a massive function
         createButtonListeners();
     }

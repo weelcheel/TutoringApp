@@ -56,5 +56,11 @@
     <string name="create_profile_alreadyhave">Already have an account? Login here.</string>
     <string name="title_activity_home">Home</string>
     <string name="title_activity_test">test</string>
+<<<<<<< HEAD
 >>>>>>> weelcheel/prototype
+=======
+
+    <!-- home screen activity strings -->
+    <string name="home_welcome">Welcome, </string>
+>>>>>>> refs/remotes/weelcheel/Prototype
 </resources>
