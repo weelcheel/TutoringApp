@@ -15,26 +15,112 @@
     <MultiAutoCompleteTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/institution_name"
+        android:text="@string/insitution_name"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
         android:id="@id/mactv_institutions"
-        tools:ignore="LabelFor" />
+        tools:ignore="LabelFor"
+        android:textAppearance="@android:style/TextAppearance.Holo" />
 
     <MultiAutoCompleteTextView
-        android:text="MultiAutoCompleteTextView"
+        android:text="Subject"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/mactv_institutions"
         android:layout_alignParentStart="true"
-        android:id="@+id/multiAutoCompleteTextView3"
-        android:layout_alignParentEnd="true" />
+        android:id="@+id/mactv_subject"
+        android:layout_alignParentEnd="true"
+        android:textAppearance="@android:style/TextAppearance.Holo" />
 
-    <Button
-        android:text="Sign In Anonomously"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/check_box_layout01"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/signinbutton" />
+        android:gravity="center_horizontal"
+        android:layout_below="@id/mactv_subject"
+        android:weightSum="1.0">
+
+        <CheckBox
+            android:text="Sun"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight=".20"
+            android:id="@+id/check_box_sunday"
+            android:layout_below="@+id/mactv_subject"
+            android:layout_alignParentStart="true" />
+
+        <CheckBox
+            android:text="Mon"
+            android:layout_width="wrap_content"
+            android:layout_weight=".20"
+            android:layout_height="wrap_content"
+            android:id="@+id/check_box_monday"
+            android:layout_alignBaseline="@+id/check_box_sunday"
+            android:layout_alignBottom="@+id/check_box_sunday"
+            android:layout_toEndOf="@+id/check_box_sunday" />
+
+        <CheckBox
+            android:text="Tue"
+            android:layout_width="wrap_content"
+            android:layout_weight=".20"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/check_box_monday"
+            android:layout_alignBottom="@+id/check_box_monday"
+            android:layout_toEndOf="@+id/check_box_monday"
+            android:id="@+id/check_box_tuesday" />
+
+        <CheckBox
+            android:text="Wed"
+            android:layout_width="wrap_content"
+            android:layout_weight=".20"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/mactv_subject"
+            android:layout_toEndOf="@+id/check_box_tuesday"
+            android:id="@+id/check_box_wed" />
+
+        <CheckBox
+            android:text="Thu"
+            android:layout_weight=".20"
+            android:id="@+id/check_box_thursday"
+            android:layout_alignBaseline="@+id/check_box_wed"
+            android:layout_alignBottom="@+id/check_box_wed"
+            android:layout_toEndOf="@+id/check_box_wed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/check_box_layout02"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:weightSum="1.0"
+        android:layout_below="@+id/check_box_layout01"
+        android:layout_alignParentStart="true">
+
+        <CheckBox
+            android:text="Fri"
+            android:layout_weight=".20"
+            android:id="@+id/check_box_friday"
+            android:layout_below="@id/check_box_sunday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <CheckBox
+            android:text="Sat"
+            android:layout_weight=".20"
+            android:id="@+id/check_box_saturday"
+            android:layout_alignBaseline="@+id/check_box_friday"
+            android:layout_alignBottom="@+id/check_box_friday"
+            android:layout_toEndOf="@+id/check_box_friday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_weight=".6"
+            android:elevation="1dp" />
+    </LinearLayout>
+
 </RelativeLayout>

@@ -105,14 +105,9 @@ public class AccountCreationActivity extends AppCompatActivity implements Google
         signInBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-<<<<<<< HEAD
-                Intent intent = new Intent(v.getContext(), FindTutorActivity.class);
-                startActivity(intent);
-                finish();
-=======
+
                 Intent loginIntent = new Intent(AccountCreationActivity.this, LoginActivity.class);
                 startActivity(loginIntent);
->>>>>>> weelcheel/prototype
             }
         });
 

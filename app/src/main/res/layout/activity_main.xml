@@ -79,10 +79,6 @@
             android:text="@string/btn_link_to_login"
             android:textAllCaps="false"
             android:textColor="@color/white"
-<<<<<<< HEAD
-            android:textSize="15dp"
-            android:onClick="startFindTutorActivity"/>
-=======
             android:textSize="15dp" />
 
         <ProgressBar
@@ -92,7 +88,6 @@
             android:layout_gravity="center|bottom"
             android:visibility="gone"
             android:layout_weight="0.00" />
->>>>>>> weelcheel/prototype
     </LinearLayout>
 
 </RelativeLayout>
