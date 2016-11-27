@@ -33,140 +33,120 @@
         android:textAppearance="@android:style/TextAppearance.Holo" />
 
     <LinearLayout
-        android:id="@+id/check_box_layout01"
-        android:layout_width="fill_parent"
+        android:id="@+id/linearlayout_schedule"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:layout_below="@id/mactv_subject"
-        android:weightSum="1.0">
-
-        <CheckBox
-            android:id="@+id/check_box_sunday"
-            android:text="Sun"
-            android:layout_width="0dp"
+        android:gravity="left"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:layout_below="@+id/mactv_subject"
+        android:clickable="true"
+        android:onClick="onClick">
+        <TextView
+            android:id="@+id/textview_start_time"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight=".20"
-            android:layout_below="@+id/mactv_subject"
-            android:layout_alignParentStart="true" />
-
-        <CheckBox
-            android:id="@+id/check_box_monday"
-            android:text="Mon"
-            android:layout_width="0dp"
+            android:textSize="16sp"
+            android:paddingRight="8dp"/>
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight=".20"
-            android:layout_alignBaseline="@+id/check_box_sunday"
-            android:layout_alignBottom="@+id/check_box_sunday"
-            android:layout_toEndOf="@+id/check_box_sunday" />
-
-        <CheckBox
-            android:id="@+id/check_box_tuesday"
-            android:text="Tue"
-            android:layout_width="0dp"
+            android:text="to"
+            android:textSize="16sp"
+            android:paddingRight="8dp"/>
+        <TextView
+            android:id="@+id/textview_end_time"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight=".20"
-            android:layout_alignBaseline="@+id/check_box_monday"
-            android:layout_alignBottom="@+id/check_box_monday"
-            android:layout_toEndOf="@+id/check_box_monday" />
-
-        <CheckBox
-            android:id="@+id/check_box_wed"
-            android:text="Wed"
-            android:layout_width="0dp"
+            android:textSize="16sp"
+            android:paddingRight="8dp"/>
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight=".20"
-            android:layout_below="@+id/mactv_subject"
-            android:layout_toEndOf="@+id/check_box_tuesday"/>
-
-        <CheckBox
-            android:id="@+id/check_box_thursday"
-            android:text="Thu"
-            android:layout_width="0dp"
+            android:text="S"
+            android:textSize="16sp"
+            android:paddingRight="8dp"
+            android:textAllCaps="true"
+            android:textStyle="bold"
+            android:textColor="#d3d3d3"/>
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight=".20"
-            android:layout_alignBaseline="@+id/check_box_wed"
-            android:layout_alignBottom="@+id/check_box_wed"
-            android:layout_toEndOf="@+id/check_box_wed"/>
+            android:text="M"
+            android:textSize="16sp"
+            android:paddingRight="8dp"
+            android:textAllCaps="true"
+            android:textStyle="bold"
+            android:textColor="#d3d3d3"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="T"
+            android:textSize="16sp"
+            android:paddingRight="8dp"
+            android:textAllCaps="true"
+            android:textStyle="bold"
+            android:textColor="#d3d3d3"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="W"
+            android:textSize="16sp"
+            android:paddingRight="8dp"
+            android:textAllCaps="true"
+            android:textStyle="bold"
+            android:textColor="#d3d3d3"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="T"
+            android:textSize="16sp"
+            android:paddingRight="8dp"
+            android:textAllCaps="true"
+            android:textStyle="bold"
+            android:textColor="#d3d3d3"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="F"
+            android:textSize="16sp"
+            android:paddingRight="8dp"
+            android:textAllCaps="true"
+            android:textStyle="bold"
+            android:textColor="#d3d3d3"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="S"
+            android:textSize="16sp"
+            android:paddingRight="8dp"
+            android:textAllCaps="true"
+            android:textStyle="bold"
+            android:textColor="#d3d3d3"/>
+
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/check_box_layout02"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:weightSum="1.0"
-        android:layout_below="@+id/check_box_layout01"
-        android:layout_alignParentStart="true">
-
-        <CheckBox
-            android:id="@+id/check_box_friday"
-            android:text="Fri"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight=".2"
-            android:layout_alignParentStart="true" />
-
-        <CheckBox
-            android:id="@+id/check_box_saturday"
-            android:text="Sat"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight=".20"
-            android:layout_alignBaseline="@+id/check_box_friday"
-            android:layout_alignBottom="@+id/check_box_friday"
-            android:layout_toEndOf="@+id/check_box_friday"
-             />
-
-        <Space
-            android:id="@+id/check_box_layout02_space01"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight=".2"
-            android:layout_alignBaseline="@+id/check_box_saturday"
-            android:layout_alignBottom="@+id/check_box_saturday"
-            android:layout_toEndOf="@+id/check_box_saturday"/>
-
-        <Space
-            android:id="@+id/check_box_layout02_space02"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight=".2"
-            android:layout_alignBaseline="@+id/check_box_layout02_space02"
-            android:layout_alignBottom="@+id/check_box_layout02_space02"
-            android:layout_toEndOf="@+id/check_box_layout02_space02"/>
-
-        <Space
-            android:id="@+id/check_box_layout02_space03"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight=".2"
-            android:layout_alignBaseline="@+id/check_box_layout02_space02"
-            android:layout_alignBottom="@+id/check_box_layout02_space02"
-            android:layout_toEndOf="@+id/check_box_layout02_space02"
-            android:duplicateParentState="false" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/find_tutor_buttons"
+        android:id="@+id/linearlayout_buttons_find_tutor"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:weightSum="1.0"
         android:layout_alignParentBottom="true"
-        android:gravity="bottom">
+        android:gravity="center">
 
         <Button
+            android:id="@+id/button_search_tutor"
             android:text="Search"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/search_tutor_button"
-            android:layout_weight="1" />
+            android:layout_weight=".4" />
 
         <Button
+            android:id="@+id/button_cancel_search"
             android:text="Cancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/cancel_search_button"
-            android:layout_weight="1" />
+            android:layout_weight=".4" />
     </LinearLayout>
-
 </RelativeLayout>

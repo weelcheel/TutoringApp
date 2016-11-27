@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.LinearLayout;
 import android.widget.MultiAutoCompleteTextView;
 import android.widget.Toast;
 
@@ -64,6 +65,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -76,7 +79,9 @@ public class FindTutorActivity extends AppCompatActivity {
 
     private EditText searchSubject;
     private CheckBox restrictInstitution;
-    private Button cancelBtn, searchBtn;
+    private Button btnCancel, btnSearch;
+    private LinearLayout selectSchedule;
+    private TextView tvStartTime, tvEndTime;
 
 
     // Create adapters for the autocomplete text fields.
@@ -89,27 +94,31 @@ public class FindTutorActivity extends AppCompatActivity {
 
         // Load the resources for the layout.
         setContentView(R.layout.activity_find_tutor);
-
+        // initialize references
         refDatabase = FirebaseDatabase.getInstance().getReference("https://tutoring-app-e2bdd/");
         refInstitution = refDatabase.child("institution");
-
+        // initialize adapters
         adapterInstitution = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
+        // initialize linear layouts
+        selectSchedule = (LinearLayout) findViewById(R.id.linearlayout_schedule);
+        // initialize buttons
+        btnSearch = (Button) findViewById(R.id.button_search_tutor);
+        btnCancel = (Button) findViewById(R.id.button_cancel_search);
+        // initialize text views
+        tvStartTime = (TextView) findViewById(R.id.textview_start_time);
+        tvEndTime = (TextView) findViewById(R.id.textview_end_time);
     }
 
-    /**
-     * Created by tylerroper on 10/30/16.
-     */
     private void createButtonListeners() {
-        cancelBtn.setOnClickListener(new View.OnClickListener() {
+        selectSchedule.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO: Switch to home activity
-                Intent i = new Intent(getApplicationContext(), HomeActivity.class);
+                Intent i = new Intent(getApplicationContext(), ScheduleSelectionActivity.class);
                 startActivity(i);
             }
         });
 
-        searchBtn.setOnClickListener(new View.OnClickListener() {
+        btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //TODO: Switch to search results activity
@@ -117,9 +126,14 @@ public class FindTutorActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
-    }
 
-    // tylerroper
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+    }
 
     @Override
     public void onStart() {
@@ -157,12 +171,36 @@ public class FindTutorActivity extends AppCompatActivity {
 
             }
         });
-
+        // on start calls
+        createButtonListeners();
         // Assign the institutions field, finding it by field.
         mactvInstitutions = (MultiAutoCompleteTextView) findViewById(R.id.mactv_institutions);
         // Set the adapter for the institutions field.
         mactvInstitutions.setAdapter(adapterInstitution);
 
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        try {
+            tvStartTime.setText(getIntent().getExtras().getString("Start Time"));
+            tvEndTime.setText(getIntent().getExtras().getString("End Time"));
+        }
+        catch (Exception e) {
+        }
+    }
+
+    public void onRestart() {
+        super.onRestart();
+        Toast.makeText(FindTutorActivity.this, "hello", Toast.LENGTH_LONG);
+        tvStartTime.setText(getIntent().getExtras().getString("Start Time"));
     }
 }
 
