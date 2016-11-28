@@ -10,8 +10,23 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginTop="40dp"
+<<<<<<< HEAD
         android:layout_gravity="center"/>
 
+=======
+        android:src="@android:drawable/ic_menu_myplaces"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/profileName"
+        android:textAppearance="@android:style/TextAppearance.Material.Title"
+        android:gravity="center"
+        android:layout_weight="0" />
+
+>>>>>>> weelcheel/Prototype
     <Button
         android:text="Profile"
         android:layout_width="150dp"
@@ -29,12 +44,20 @@
         android:id="@+id/find_tutor_button" />
 
     <Button
+<<<<<<< HEAD
         android:text="Messages"
+=======
+        android:text="Conversations"
+>>>>>>> weelcheel/Prototype
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_gravity="center"
+<<<<<<< HEAD
         android:id="@+id/messages_button" />
+=======
+        android:id="@+id/convo_button" />
+>>>>>>> weelcheel/Prototype
 
     <Button
         android:text="Log Out"

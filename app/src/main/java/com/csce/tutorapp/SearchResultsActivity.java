@@ -37,6 +37,10 @@ public class SearchResultsActivity extends AppCompatActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+<<<<<<< HEAD
+=======
+        super.onCreate(savedInstanceState);
+>>>>>>> weelcheel/Prototype
 
         //load the view for the page
         setContentView(R.layout.search_results_activity);
@@ -53,7 +57,11 @@ public class SearchResultsActivity extends AppCompatActivity{
             @Override
             public void onClick(View v){
                 //TODO: Switch to home activity
+<<<<<<< HEAD
                 Intent i = new Intent(getApplicationContext(), HomeScreenActivity.class);
+=======
+                Intent i = new Intent(getApplicationContext(), HomeActivity.class);
+>>>>>>> weelcheel/Prototype
                 startActivity(i);
             }
         });

@@ -12,6 +12,8 @@ import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.Map;
+
 /**
  * Created by willh on 10/17/2016.
  *
@@ -20,6 +22,9 @@ import com.google.firebase.database.FirebaseDatabase;
  */
 
 public class FirebaseUtility {
+
+    /* string that is pathed to user accounts in Intent bundles */
+    public final static String INTENT_USER_PATH = "com.csce.tutorapp.USER";
     
     /* gets the current Firebase Authenticator */
     public static FirebaseAuth getAuthenticator(){
@@ -58,10 +63,10 @@ public class FirebaseUtility {
     }
 
     /* adds or updates the User profile to the Firebase database */
-    public static void updateUser(User userProfile){
-        DatabaseReference firebaseDatabase = FirebaseDatabase.getInstance().getReference();
+    public static void updateUser(User savedUser){
+        DatabaseReference firebaseDatabase = FirebaseDatabase.getInstance().getReference("users");
 
         //pushes the User object into the database
-        firebaseDatabase.child("users").child(userProfile.getID()).child("profile").setValue(userProfile);
+        firebaseDatabase.child(savedUser.getID()).setValue(savedUser);
     }
 }
