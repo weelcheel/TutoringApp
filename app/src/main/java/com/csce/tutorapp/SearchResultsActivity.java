@@ -67,5 +67,7 @@ public class SearchResultsActivity extends AppCompatActivity{
                 startActivity(i);
             }
         });
+
+        //TODO: Add a modify search button, and associated functionality
     }
 }

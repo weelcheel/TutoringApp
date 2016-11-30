@@ -4,7 +4,7 @@
     android:id="@+id/activity_schedule_selection_activity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.csce.tutorapp.activity_schedule_selection">
+    tools:context="com.csce.tutorapp.ScheduleSelectionActivity">
 
     <LinearLayout
         android:id="@+id/schedule_selection_start_time_label"

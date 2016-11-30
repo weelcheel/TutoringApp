@@ -4,6 +4,7 @@ package com.csce.tutorapp;
         import android.support.v7.app.AppCompatActivity;
         import android.os.Bundle;
         import android.text.format.Time;
+        import android.text.style.TtsSpan;
         import android.view.View;
         import android.widget.Button;
         import android.widget.TextView;
@@ -25,7 +26,7 @@ public class ScheduleSelectionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         // Load layout resources
-        setContentView(R.layout.activity_schedule_selection);
+        setContentView(R.layout.schedule_selection_activity);
 
         btnSave = (Button) findViewById(R.id.save_schedule_selection_button);
         btnCancel = (Button) findViewById(R.id.cancel_schedule_selection_button);
@@ -48,10 +49,12 @@ public class ScheduleSelectionActivity extends AppCompatActivity {
                 StringBuilder startTime = new StringBuilder().append(tpStartTime.getCurrentHour()).append(":").append(tpStartTime.getCurrentMinute()).append(ampm);
                 b.putString("Start Time", startTime.toString());
                 ampm = endHour > 11 ? " PM" : " AM";
-                StringBuilder endTime = new StringBuilder().append(tpEndTime.getCurrentHour().toString()).append(":").append(tpEndTime.getCurrentMinute()).append(ampm);
+                StringBuilder endTime = new StringBuilder().append(tpEndTime.getCurrentHour()).append(":").append(tpEndTime.getCurrentMinute()).append(ampm);
                 b.putString("End Time", endTime.toString());
                 Intent i = new Intent(ScheduleSelectionActivity.this, FindTutorActivity.class);
                 i.putExtras(b);
+                Intent finishActivity = new Intent("finish_find_tutor");
+                sendBroadcast(finishActivity);
                 startActivity(i);
                 finish();
             }

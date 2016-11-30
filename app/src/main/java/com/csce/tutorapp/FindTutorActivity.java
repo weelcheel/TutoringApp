@@ -4,11 +4,15 @@ package com.csce.tutorapp;
 // Last Update: 10/23/2016
 // Description: Gets information from the user to do a search of users that meet the criteria.
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.nfc.Tag;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.format.Time;
 import android.util.Log;
 import android.view.View;
 import android.widget.Adapter;
@@ -18,6 +22,7 @@ import android.widget.LinearLayout;
 import android.widget.MultiAutoCompleteTextView;
 import android.widget.Toast;
 
+import com.facebook.appevents.internal.Constants;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
@@ -67,7 +72,11 @@ import com.google.android.gms.common.api.GoogleApiClient;
 
 import org.w3c.dom.Text;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class FindTutorActivity extends AppCompatActivity {
@@ -83,9 +92,10 @@ public class FindTutorActivity extends AppCompatActivity {
     private LinearLayout selectSchedule;
     private TextView tvStartTime, tvEndTime;
 
-
     // Create adapters for the autocomplete text fields.
     ArrayAdapter<String> adapterInstitution;
+
+    BroadcastReceiver brFindTutor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,7 +103,7 @@ public class FindTutorActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         // Load the resources for the layout.
-        setContentView(R.layout.activity_find_tutor);
+        setContentView(R.layout.find_tutor_activity);
         // initialize references
         refDatabase = FirebaseDatabase.getInstance().getReference("https://tutoring-app-e2bdd/");
         refInstitution = refDatabase.child("institution");
@@ -107,6 +117,17 @@ public class FindTutorActivity extends AppCompatActivity {
         // initialize text views
         tvStartTime = (TextView) findViewById(R.id.textview_start_time);
         tvEndTime = (TextView) findViewById(R.id.textview_end_time);
+
+        brFindTutor = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                String action = intent.getAction();
+                if (action.equals("finish_find_tutor")) {
+                    finish();
+                }
+            }
+        };
+        registerReceiver(brFindTutor, new IntentFilter("finish_activity"));
     }
 
     private void createButtonListeners() {
@@ -177,6 +198,10 @@ public class FindTutorActivity extends AppCompatActivity {
         mactvInstitutions = (MultiAutoCompleteTextView) findViewById(R.id.mactv_institutions);
         // Set the adapter for the institutions field.
         mactvInstitutions.setAdapter(adapterInstitution);
+        // Set the times to the current time and the current time +1 hour
+        //String test = ;
+        tvStartTime.setText(DateFormat.getTimeInstance().format(DateFormat.SHORT));
+        tvEndTime.setText(DateFormat.getTimeInstance().format(DateFormat.SHORT));
 
     }
 
@@ -194,13 +219,20 @@ public class FindTutorActivity extends AppCompatActivity {
             tvEndTime.setText(getIntent().getExtras().getString("End Time"));
         }
         catch (Exception e) {
+            tvStartTime.setText(DateFormat.getTimeInstance().format(DateFormat.SHORT).toString());
+            tvEndTime.setText(DateFormat.getTimeInstance().format(DateFormat.SHORT).toString());
         }
     }
 
     public void onRestart() {
         super.onRestart();
-        Toast.makeText(FindTutorActivity.this, "hello", Toast.LENGTH_LONG);
-        tvStartTime.setText(getIntent().getExtras().getString("Start Time"));
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(brFindTutor);
+
     }
 }
 
