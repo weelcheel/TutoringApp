@@ -62,7 +62,7 @@ public class ViewTutorActivity extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 //TODO: Switch to home activity
-                Intent i = new Intent(getApplicationContext(), HomeScreenActivity.class);
+                Intent i = new Intent(getApplicationContext(), HomeActivity.class);
                 startActivity(i);
             }
         });
