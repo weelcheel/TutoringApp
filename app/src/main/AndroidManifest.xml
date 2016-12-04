@@ -64,7 +64,8 @@
         <activity android:name=".ConversationListActivity" />
         <activity android:name=".ProfileActivity"/>
         <activity android:name=".FindTutorActivity"/>
-        <activity android:name=".SearchResultsActivity"/>
+        <activity android:name=".SearchResultsActivity" />
+        <activity android:name=".EditProfileActivity"/>
     </application>
 
 </manifest>

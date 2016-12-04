@@ -27,7 +27,7 @@ public class ProfileActivity extends AppCompatActivity{
     private TextView userNameTxt, subjectsTxt, aboutTxt;
     private RatingBar studentRating, tutorRating;
     private Button editBtn, homeBtn;
-    private User signedInUser;
+    private User signedInUser = new User(FirebaseUtility.getCurrentFirebaseUser().getUid());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +43,7 @@ public class ProfileActivity extends AppCompatActivity{
         studentRating = (RatingBar) findViewById(R.id.student_rating_bar);
         tutorRating = (RatingBar) findViewById(R.id.tutor_rating_bar);
 
+
         final DatabaseReference userProfileDb = FirebaseDatabase.getInstance().getReference("users").child(FirebaseUtility.getCurrentFirebaseUser().getUid());
         userProfileDb.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -51,35 +52,19 @@ public class ProfileActivity extends AppCompatActivity{
                 // whenever data at this location is updated.
                 signedInUser = dataSnapshot.getValue(User.class);
                 if (signedInUser != null) {
-                    Log.d("profile", "Value is: " + signedInUser.getEmail());
-                    if (signedInUser.getIsProfileCreated()) {
-                        //populate home screen here
-                        userNameTxt.setText(signedInUser.getFirstName() + " " + signedInUser.getLastName());
-                        userNameTxt.setVisibility(View.VISIBLE);
-                    } else {
-                        Intent userprofileIntent = new Intent(ProfileActivity.this, UserProfileActivity.class);
-                        userprofileIntent.putExtra(FirebaseUtility.INTENT_USER_PATH, signedInUser);
-                        startActivity(userprofileIntent);
-                        finish();
-                    }
-                } else {
-                    User newUser = new User(FirebaseUtility.getCurrentFirebaseUser().getUid());
-                    //HashMap<String, User> userMap = new HashMap<>();
-                    //userMap.put(newUser.getID(), newUser);
-                    FirebaseUtility.updateUser(newUser);
+                    userNameTxt.setText(signedInUser.getFirstName() + " " + signedInUser.getLastName());
 
-                    Intent userprofileIntent = new Intent(ProfileActivity.this, UserProfileActivity.class);
-                    userprofileIntent.putExtra(FirebaseUtility.INTENT_USER_PATH, newUser);
-                    startActivity(userprofileIntent);
-                    finish();
+                    for(int i = 0; i < signedInUser.getStudentSubjects().size(); i++) {
+                        subjectsTxt.setText(subjectsTxt.getText() + signedInUser.getStudentSubjects().get(i) + " \n");
+                    }
+
+                    aboutTxt.setText(signedInUser.getAbout());
                 }
             }
-
             @Override
             public void onCancelled(DatabaseError error) {
                 // Failed to read value
                 Log.w("profile", "Failed to read value.", error.toException());
-                userNameTxt.setText("ERROR! :(");
             }
         });
 
@@ -101,6 +86,8 @@ public class ProfileActivity extends AppCompatActivity{
             @Override
             public void onClick(View v){
                 //TODO: switch to edit screen
+                Intent i = new Intent(getApplicationContext(), EditProfileActivity.class);
+                startActivity(i);
             }
         });
     }
