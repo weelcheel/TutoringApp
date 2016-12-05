@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "622341333789",
+    "firebase_url": "https://tutoring-app-e2bdd.firebaseio.com",
+    "project_id": "tutoring-app-e2bdd",
+    "storage_bucket": "tutoring-app-e2bdd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:622341333789:android:e86cb51941ba8654",
+        "android_client_info": {
+          "package_name": "com.csce.tutorapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "622341333789-rrb0okl1r58n3nvulfon3vcvcb4taro2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.csce.tutorapp",
+            "certificate_hash": "C41062C47C256053AA2DCCDF8BD077CF338D2902"
+          }
+        },
+        {
+          "client_id": "622341333789-tgiiflc44cofbacbe91irh7o2jlet9jk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDgVKX4Ww4a9TxvzqX-bF9kjWM7tiCmJ7w"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "622341333789-tgiiflc44cofbacbe91irh7o2jlet9jk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
