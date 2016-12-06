@@ -13,21 +13,11 @@
     tools:context="com.csce.tutorapp.FindTutorActivity">
 
     <MultiAutoCompleteTextView
-        android:id="@id/mactv_institutions"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/insitution_name"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        tools:ignore="LabelFor"
-        android:textAppearance="@android:style/TextAppearance.Holo" />
-
-    <MultiAutoCompleteTextView
         android:id="@+id/mactv_subject"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/subject_name"
-        android:layout_below="@+id/mactv_institutions"
+        android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:textAppearance="@android:style/TextAppearance.Holo" />
@@ -199,8 +189,4 @@
             android:layout_height="wrap_content"
             android:layout_weight=".4" />
     </LinearLayout>
-
-
-
-
 </RelativeLayout>

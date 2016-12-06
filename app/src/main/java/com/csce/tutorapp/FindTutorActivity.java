@@ -12,12 +12,16 @@ import android.nfc.Tag;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextWatcher;
 import android.text.format.Time;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Filterable;
 import android.widget.LinearLayout;
 import android.widget.MultiAutoCompleteTextView;
 import android.widget.Toast;
@@ -80,11 +84,13 @@ import java.util.Date;
 import java.util.List;
 
 public class FindTutorActivity extends AppCompatActivity {
-    MultiAutoCompleteTextView mactvInstitutions;
+    AutoCompleteTextView actvSubject;
+    MultiAutoCompleteTextView mactvSubject;
     private static final String TAG = "AnonymousAuth";
 
     private DatabaseReference refDatabase;
     private DatabaseReference refInstitution;
+    private DatabaseReference refSubject;
 
     private EditText searchSubject;
     private CheckBox restrictInstitution;
@@ -93,7 +99,7 @@ public class FindTutorActivity extends AppCompatActivity {
     private TextView tvStartTime, tvEndTime;
 
     // Create adapters for the autocomplete text fields.
-    ArrayAdapter<String> adapterInstitution;
+    ArrayAdapter<String> adapterSubject;
 
     BroadcastReceiver brFindTutor;
 
@@ -105,18 +111,21 @@ public class FindTutorActivity extends AppCompatActivity {
         // Load the resources for the layout.
         setContentView(R.layout.find_tutor_activity);
         // initialize references
-        refDatabase = FirebaseDatabase.getInstance().getReference("https://tutoring-app-e2bdd/");
+        refDatabase = FirebaseDatabase.getInstance().getReference();
         refInstitution = refDatabase.child("institution");
-        // initialize adapters
-        adapterInstitution = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
+        refSubject = refDatabase.child("subject");
         // initialize linear layouts
         selectSchedule = (LinearLayout) findViewById(R.id.linearlayout_schedule);
         // initialize buttons
         btnSearch = (Button) findViewById(R.id.button_search_tutor);
         btnCancel = (Button) findViewById(R.id.button_cancel_search);
         // initialize text views
+        mactvSubject = (MultiAutoCompleteTextView) findViewById(R.id.mactv_subject);
         tvStartTime = (TextView) findViewById(R.id.textview_start_time);
         tvEndTime = (TextView) findViewById(R.id.textview_end_time);
+
+        createButtonListeners();
+        getSubjectList();
 
         brFindTutor = new BroadcastReceiver() {
             @Override
@@ -156,35 +165,17 @@ public class FindTutorActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-
-        // Listens for user to attempt to put information in the institution field.
-        // Grab data from the database to make suggestions as the user types their institution.
-        ValueEventListener mactvInstitutionsFieldListener = new ValueEventListener() {
+    private void getSubjectList() {
+        final ArrayList<String> subjectList = new ArrayList<String>();
+        refDatabase.child("institution").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot institutions : dataSnapshot.getChildren()) {
-                    String institution = institutions.getValue(String.class);
-                    adapterInstitution.add(institution);
-                    Log.d(TAG, "institution:" + institution);
+                    subjectList.add(institutions.getValue().toString());
                 }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        };
-        refInstitution.addValueEventListener(mactvInstitutionsFieldListener);
-        refDatabase.child("institution").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot institutions : dataSnapshot.getChildren()) {
-                    String institution = institutions.getValue(String.class);
-                    adapterInstitution.add(institution);
-                }
+                adapterSubject = new ArrayAdapter<String>(FindTutorActivity.this, android.R.layout.simple_list_item_1, subjectList);
+                mactvSubject.setAdapter(adapterSubject);
+                mactvSubject.setThreshold(1);
             }
 
             @Override
@@ -192,12 +183,12 @@ public class FindTutorActivity extends AppCompatActivity {
 
             }
         });
-        // on start calls
-        createButtonListeners();
-        // Assign the institutions field, finding it by field.
-        mactvInstitutions = (MultiAutoCompleteTextView) findViewById(R.id.mactv_institutions);
-        // Set the adapter for the institutions field.
-        mactvInstitutions.setAdapter(adapterInstitution);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
         // Set the times to the current time and the current time +1 hour
         //String test = ;
         tvStartTime.setText(DateFormat.getTimeInstance().format(DateFormat.SHORT));
