@@ -57,7 +57,7 @@
         android:id="@+id/logout_button" />
 
     <Button
-        android:text="Become Active Tutor"
+        android:text="Toggle Active Tutor"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"

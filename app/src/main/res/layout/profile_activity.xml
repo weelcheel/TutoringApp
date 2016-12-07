@@ -116,6 +116,13 @@
         android:id="@+id/about_text"
         android:layout_weight="0.95" />
 
+    <Button
+        android:text="Send Message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/send_msg_btn"
+        android:layout_gravity="center" />
+
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
