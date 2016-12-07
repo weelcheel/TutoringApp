@@ -65,7 +65,8 @@
         <activity android:name=".ProfileActivity" />
         <activity android:name=".FindTutorActivity" />
         <activity android:name=".SearchResultsActivity" />
-        <activity android:name=".ScheduleSelectionActivity"></activity>
+        <activity android:name=".ScheduleSelectionActivity" />
+        <activity android:name=".EditProfileActivity"/>
     </application>
 
 </manifest>

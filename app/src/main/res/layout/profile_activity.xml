@@ -18,7 +18,7 @@
             android:layout_marginLeft="40dp"/>
 
         <TextView
-            android:text="First Last"
+            android:text=""
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="60dp"

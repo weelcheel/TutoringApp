@@ -1,33 +1,22 @@
 package com.csce.tutorapp;
 
-import android.support.v7.app.AppCompatActivity;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.Signature;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.util.Base64;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.ProgressBar;
-import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.RatingBar;
 import android.widget.Toast;
 
-import com.facebook.CallbackManager;
-import com.facebook.FacebookSdk;
-import com.facebook.login.widget.LoginButton;
-import com.google.android.gms.auth.api.Auth;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.SignInButton;
-import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 
 /**
  * Created by tylerroper on 10/29/16.
@@ -38,6 +27,7 @@ public class ProfileActivity extends AppCompatActivity{
     private TextView userNameTxt, subjectsTxt, aboutTxt;
     private RatingBar studentRating, tutorRating;
     private Button editBtn, homeBtn;
+    private User signedInUser = new User(FirebaseUtility.getCurrentFirebaseUser().getUid());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +42,31 @@ public class ProfileActivity extends AppCompatActivity{
         aboutTxt = (TextView) findViewById(R.id.about_text);
         studentRating = (RatingBar) findViewById(R.id.student_rating_bar);
         tutorRating = (RatingBar) findViewById(R.id.tutor_rating_bar);
+
+
+        final DatabaseReference userProfileDb = FirebaseDatabase.getInstance().getReference("users").child(FirebaseUtility.getCurrentFirebaseUser().getUid());
+        userProfileDb.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                signedInUser = dataSnapshot.getValue(User.class);
+                if (signedInUser != null) {
+                    userNameTxt.setText(signedInUser.getFirstName() + " " + signedInUser.getLastName());
+
+                    for(int i = 0; i < signedInUser.getStudentSubjects().size(); i++) {
+                        subjectsTxt.setText(subjectsTxt.getText() + signedInUser.getStudentSubjects().get(i) + " \n");
+                    }
+
+                    aboutTxt.setText(signedInUser.getAbout());
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w("profile", "Failed to read value.", error.toException());
+            }
+        });
 
         createButtonListeners();
     }
@@ -71,7 +86,10 @@ public class ProfileActivity extends AppCompatActivity{
             @Override
             public void onClick(View v){
                 //TODO: switch to edit screen
+                Intent i = new Intent(getApplicationContext(), EditProfileActivity.class);
+                startActivity(i);
             }
         });
     }
+
 }
