@@ -166,4 +166,8 @@ public class User implements Parcelable {
             return new User[size];
         }
     };
+
+    public String toString(){
+        return firstName + " " + lastName;
+    }
 }

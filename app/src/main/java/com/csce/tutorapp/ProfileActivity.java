@@ -43,8 +43,9 @@ public class ProfileActivity extends AppCompatActivity{
         studentRating = (RatingBar) findViewById(R.id.student_rating_bar);
         tutorRating = (RatingBar) findViewById(R.id.tutor_rating_bar);
 
+        String inUser = getIntent().getStringExtra("userid");
 
-        final DatabaseReference userProfileDb = FirebaseDatabase.getInstance().getReference("users").child(FirebaseUtility.getCurrentFirebaseUser().getUid());
+        final DatabaseReference userProfileDb = FirebaseDatabase.getInstance().getReference("users").child(inUser != null ? inUser : FirebaseUtility.getCurrentFirebaseUser().getUid());
         userProfileDb.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
