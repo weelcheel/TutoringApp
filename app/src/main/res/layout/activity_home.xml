@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context="com.csce.tutorapp.HomeActivity">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:text="TextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/profileName"
+            android:textAppearance="@android:style/TextAppearance.Material.Title"
+            android:gravity="center"
+            android:layout_weight="0" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="80" />
+
+        <Button
+            android:text="Conversations"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/testConvo" />
+
+        <Button
+            android:text="@string/btn_sign_out"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/signoutBtn" />
+
+    </LinearLayout>
+</android.support.design.widget.CoordinatorLayout>
