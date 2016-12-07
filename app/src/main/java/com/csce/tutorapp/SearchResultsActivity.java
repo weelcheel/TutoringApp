@@ -12,6 +12,8 @@ import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -26,6 +28,14 @@ import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+
 /**
  * Created by tylerroper on 10/29/16.
  */
@@ -34,6 +44,10 @@ public class SearchResultsActivity extends AppCompatActivity{
 
     private Button homeBtn, newSearchBtn;
     private ListView tutorList;
+    private ArrayList<String> foundTutorKeys;
+    private ArrayList<User> foundUsers;
+    private ArrayAdapter<User> listAdapter;
+    private int foundKeysIndex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +58,18 @@ public class SearchResultsActivity extends AppCompatActivity{
         homeBtn = (Button) findViewById(R.id.home_button);
         newSearchBtn = (Button) findViewById(R.id.new_search_button);
         tutorList = (ListView) findViewById(R.id.tutor_list);
+
+        //go through each of the keys and grab profile information about them all
+        foundUsers = new ArrayList<>();
+        foundKeysIndex = 0;
+        foundTutorKeys = getIntent().getStringArrayListExtra("foundkeys");
+
+        if (foundKeysIndex < foundTutorKeys.size()) {
+            ConsumeNextTutorKey(foundTutorKeys.get(foundKeysIndex));
+        }
+
+        listAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, foundUsers);
+        tutorList.setAdapter(listAdapter);
 
         createButtonListeners();
     }
@@ -67,5 +93,46 @@ public class SearchResultsActivity extends AppCompatActivity{
                 startActivity(i);
             }
         });
+
+        tutorList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (position >= 0 && position < foundUsers.size() && foundUsers.get(position) != null){
+                    Intent convoIntent = new Intent(SearchResultsActivity.this, ProfileActivity.class);
+                    convoIntent.putExtra("userid", foundUsers.get(position).getID());
+                    startActivity(convoIntent);
+                }
+            }
+        });
+    }
+
+    private void ConsumeNextTutorKey(String key){
+        DatabaseReference userProfileDb = FirebaseDatabase.getInstance().getReference("users").child(key);
+        userProfileDb.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                User foundUser = dataSnapshot.getValue(User.class); //get the user info from Firebase
+                if (foundUser != null){
+                    foundUsers.add(foundUser);
+                }
+
+                foundKeysIndex++;
+                if (foundKeysIndex < foundTutorKeys.size()) {
+                    ConsumeNextTutorKey(foundTutorKeys.get(foundKeysIndex));
+                }
+                else{
+                    FillListResults();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void FillListResults(){
+        listAdapter.notifyDataSetChanged();
     }
 }
