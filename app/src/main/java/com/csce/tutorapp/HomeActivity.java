@@ -47,6 +47,9 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_screen_activity);
 
+        Intent serIntent = new Intent(this, ConversationBroadcastReceiver.class);
+        startService(serIntent);
+
         //assign button
         signoutButton = (Button) findViewById(R.id.logout_button);
         profileName = (TextView) findViewById(R.id.profileName);
@@ -105,19 +108,39 @@ public class HomeActivity extends AppCompatActivity {
         activeTutorBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int permissionCheck = ContextCompat.checkSelfPermission(HomeActivity.this, android.Manifest.permission.ACCESS_FINE_LOCATION);
-                if (permissionCheck != PackageManager.PERMISSION_GRANTED)
-                {
-                    ActivityCompat.requestPermissions(HomeActivity.this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_PERMISSION_GRANTED);
-                    return;
-                }
+                activeTutorBtn.setEnabled(false);
+                DatabaseReference ref = FirebaseDatabase.getInstance().getReference("activetutors");
+                ref.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.hasChild(signedInUser.getID())){
+                            geoFire.removeLocation(signedInUser.getID());
+                            Toast.makeText(HomeActivity.this, "You are no longer an active tutor.", Toast.LENGTH_LONG).show();
+                            activeTutorBtn.setEnabled(true);
+                        }
+                        else{
+                            int permissionCheck = ContextCompat.checkSelfPermission(HomeActivity.this, android.Manifest.permission.ACCESS_FINE_LOCATION);
+                            if (permissionCheck != PackageManager.PERMISSION_GRANTED)
+                            {
+                                ActivityCompat.requestPermissions(HomeActivity.this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_PERMISSION_GRANTED);
+                                return;
+                            }
 
-                MakeActiveTutor();
+                            MakeActiveTutor();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        activeTutorBtn.setEnabled(true);
+                    }
+                });
             }
         });
 
 
         final DatabaseReference userProfileDb = FirebaseDatabase.getInstance().getReference("users").child(FirebaseUtility.getCurrentFirebaseUser().getUid());
+
         userProfileDb.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -175,6 +198,7 @@ public class HomeActivity extends AppCompatActivity {
                     geoFire.setLocation(signedInUser.getID(), new GeoLocation(location.getLatitude(), location.getLongitude()));
 
                     Toast.makeText(HomeActivity.this, "You are now an active tutor.", Toast.LENGTH_LONG).show();
+                    activeTutorBtn.setEnabled(true);
                     locationManager.removeUpdates(this);
                 }
 
@@ -196,5 +220,10 @@ public class HomeActivity extends AppCompatActivity {
 
             locationManager.requestLocationUpdates(locationManager.GPS_PROVIDER, 5000, 10, locListener);
         }
+    }
+
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults){
+        if (requestCode == LOCATION_PERMISSION_GRANTED)
+            MakeActiveTutor();
     }
 }
