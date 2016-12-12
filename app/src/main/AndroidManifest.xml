@@ -61,7 +61,6 @@
         <activity android:name=".ProfileActivity" />
         <activity android:name=".FindTutorActivity" />
         <activity android:name=".SearchResultsActivity" />
-        <activity android:name=".ScheduleSelectionActivity" />
         <activity android:name=".EditProfileActivity"/>
 
         <service android:name=".ConversationBroadcastReceiver"

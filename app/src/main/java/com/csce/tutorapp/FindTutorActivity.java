@@ -8,6 +8,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Color;
 import android.nfc.Tag;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -104,17 +105,18 @@ public class FindTutorActivity extends AppCompatActivity {
 
     private EditText searchSubject;
     private CheckBox restrictInstitution;
-    private Button btnCancel, btnSearch;
-    private LinearLayout selectSchedule;
-    private TextView tvStartTime, tvEndTime;
+    private Button btnCancel, btnSearch, btnSun, btnMon, btnTue, btnWed, btnThu, btnFri, btnSat;
 
     // Create adapters for the autocomplete text fields.
     ArrayAdapter<String> adapterSubject;
 
     BroadcastReceiver brFindTutor;
-    private Button cancelBtn, searchBtn;
     private GeoFire geoFire;
     private ArrayList<String> foundTutorKeys;
+
+    //Colors
+    int colorGreen;
+    int colorGray;
 
     public static int LOCATION_PERMISSION_GRANTED = 710;
 
@@ -130,42 +132,39 @@ public class FindTutorActivity extends AppCompatActivity {
         refInstitution = refDatabase.child("institution");
         refSubject = refDatabase.child("subject");
         // initialize linear layouts
-        selectSchedule = (LinearLayout) findViewById(R.id.linearlayout_schedule);
         // initialize buttons
+        btnSun = (Button) findViewById(R.id.schedule_dayOfWeek_Sunday_button);
+        btnMon = (Button) findViewById(R.id.schedule_dayOfWeek_Monday_button);
+        btnTue = (Button) findViewById(R.id.schedule_dayOfWeek_Tuesday_button);
+        btnWed = (Button) findViewById(R.id.schedule_dayOfWeek_Wednesday_button);
+        btnThu = (Button) findViewById(R.id.schedule_dayOfWeek_Thursday_button);
+        btnFri = (Button) findViewById(R.id.schedule_dayOfWeek_Friday_button);
+        btnSat = (Button) findViewById(R.id.schedule_dayOfWeek_Saturday_button);
         btnSearch = (Button) findViewById(R.id.button_search_tutor);
         btnCancel = (Button) findViewById(R.id.button_cancel_search);
         // initialize text views
         mactvSubject = (MultiAutoCompleteTextView) findViewById(R.id.mactv_subject);
-        tvStartTime = (TextView) findViewById(R.id.textview_start_time);
-        tvEndTime = (TextView) findViewById(R.id.textview_end_time);
 
         //initialize geofire
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("activetutors");
         geoFire = new GeoFire(ref);
 
+        //Colors
+        colorGreen = Color.parseColor("#1e961e");
+        colorGray = Color.parseColor("#b4b4b4");
+
         foundTutorKeys = new ArrayList<>();
 
         createButtonListeners();
         getSubjectList();
-
-        brFindTutor = new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                String action = intent.getAction();
-                if (action.equals("finish_find_tutor")) {
-                    finish();
-                }
-            }
-        };
-        registerReceiver(brFindTutor, new IntentFilter("finish_activity"));
     }
 
     private void createButtonListeners() {
-        selectSchedule.setOnClickListener(new View.OnClickListener() {
+
+        btnSun .setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), ScheduleSelectionActivity.class);
-                startActivity(i);
+
             }
         });
 
@@ -218,12 +217,6 @@ public class FindTutorActivity extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-
-        // Set the times to the current time and the current time +1 hour
-        //String test = ;
-        tvStartTime.setText(DateFormat.getTimeInstance().format(DateFormat.SHORT));
-        tvEndTime.setText(DateFormat.getTimeInstance().format(DateFormat.SHORT));
-
     }
 
     @Override
@@ -235,14 +228,6 @@ public class FindTutorActivity extends AppCompatActivity {
     @Override
     public void onResume() {
         super.onResume();
-        try {
-            tvStartTime.setText(getIntent().getExtras().getString("Start Time"));
-            tvEndTime.setText(getIntent().getExtras().getString("End Time"));
-        }
-        catch (Exception e) {
-            tvStartTime.setText(DateFormat.getTimeInstance().format(DateFormat.SHORT).toString());
-            tvEndTime.setText(DateFormat.getTimeInstance().format(DateFormat.SHORT).toString());
-        }
     }
 
     public void onRestart() {
@@ -252,9 +237,6 @@ public class FindTutorActivity extends AppCompatActivity {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        unregisterReceiver(brFindTutor);
-
-
     }
 
     private void ExecuteTutorSearch(){

@@ -23,96 +23,66 @@
         android:textAppearance="@android:style/TextAppearance.Holo" />
 
     <LinearLayout
-        android:id="@+id/linearlayout_schedule"
+        android:id="@+id/schedule_dayOfWeek_button_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="left"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
         android:layout_below="@+id/mactv_subject"
-        android:clickable="true"
-        android:onClick="onClick">
-        <TextView
-            android:id="@+id/textview_start_time"
-            android:layout_width="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:paddingTop="10dp">
+
+        <Button
+            android:id="@+id/schedule_dayOfWeek_Sunday_button"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:paddingRight="8dp"/>
-        <TextView
-            android:layout_width="wrap_content"
+            android:layout_weight=".13"
+            android:text="Sun"
+            android:textSize="10dp" />
+        <Button
+            android:id="@+id/schedule_dayOfWeek_Monday_button"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="to"
-            android:textSize="16sp"
-            android:paddingRight="8dp"/>
-        <TextView
-            android:id="@+id/textview_end_time"
-            android:layout_width="wrap_content"
+            android:layout_weight=".13"
+            android:text="Mon"
+            android:textSize="10dp" />
+        <Button
+            android:id="@+id/schedule_dayOfWeek_Tuesday_button"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:paddingRight="8dp"/>
-        <TextView
-            android:layout_width="wrap_content"
+            android:layout_weight=".13"
+            android:text="Tue"
+            android:textSize="10dp" />
+        <Button
+            android:id="@+id/schedule_dayOfWeek_Wednesday_button"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="S"
-            android:textSize="16sp"
-            android:paddingRight="8dp"
-            android:textAllCaps="true"
-            android:textStyle="bold"
-            android:textColor="#d3d3d3"/>
-        <TextView
-            android:layout_width="wrap_content"
+            android:layout_weight=".13"
+            android:text="Wed"
+            android:textSize="10dp" />
+        <Button
+            android:id="@+id/schedule_dayOfWeek_Thursday_button"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="M"
-            android:textSize="16sp"
-            android:paddingRight="8dp"
-            android:textAllCaps="true"
-            android:textStyle="bold"
-            android:textColor="#d3d3d3"/>
-        <TextView
-            android:layout_width="wrap_content"
+            android:layout_weight=".13"
+            android:text="Thu"
+            android:textSize="10dp" />
+        <Button
+            android:id="@+id/schedule_dayOfWeek_Friday_button"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="T"
-            android:textSize="16sp"
-            android:paddingRight="8dp"
-            android:textAllCaps="true"
-            android:textStyle="bold"
-            android:textColor="#d3d3d3"/>
-        <TextView
-            android:layout_width="wrap_content"
+            android:layout_weight=".13"
+            android:text="Fri"
+            android:textSize="10dp" />
+        <Button
+            android:id="@+id/schedule_dayOfWeek_Saturday_button"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="W"
-            android:textSize="16sp"
-            android:paddingRight="8dp"
-            android:textAllCaps="true"
-            android:textStyle="bold"
-            android:textColor="#d3d3d3"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="T"
-            android:textSize="16sp"
-            android:paddingRight="8dp"
-            android:textAllCaps="true"
-            android:textStyle="bold"
-            android:textColor="#d3d3d3"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="F"
-            android:textSize="16sp"
-            android:paddingRight="8dp"
-            android:textAllCaps="true"
-            android:textStyle="bold"
-            android:textColor="#d3d3d3"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="S"
-            android:textSize="16sp"
-            android:paddingRight="8dp"
-            android:textAllCaps="true"
-            android:textStyle="bold"
-            android:textColor="#d3d3d3"/>
+            android:layout_weight=".13"
+            android:text="Sat"
+            android:textSize="10dp"
+            android:onClick="onClick"/>
 
     </LinearLayout>
 
@@ -121,7 +91,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_below="@+id/linearlayout_schedule"
+        android:layout_below="@+id/schedule_dayOfWeek_button_container"
         android:layout_alignParentStart="true"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp" >

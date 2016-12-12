@@ -128,7 +128,7 @@ public class SearchResultsActivity extends AppCompatActivity{
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                
+
             }
         });
     }
