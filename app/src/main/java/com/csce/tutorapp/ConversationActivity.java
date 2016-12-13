@@ -7,6 +7,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -40,8 +41,8 @@ public class ConversationActivity extends AppCompatActivity {
 
         currentConversationMessages = new ArrayList<>();
 
-        final ConversationAdapter adapter = new ConversationAdapter(this, android.R.layout.simple_list_item_1, currentConversationMessages);
-        convoList.setAdapter(adapter);
+        //final ConversationAdapter adapter = new ConversationAdapter(this, android.R.layout.simple_list_item_1, currentConversationMessages);
+        //convoList.setAdapter(adapter);
 
         final String convoID = getIntent().getStringExtra("convoID");
         final DatabaseReference userProfileDb = FirebaseDatabase.getInstance().getReference("conversations").child(convoID);
@@ -50,13 +51,13 @@ public class ConversationActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 currentConversationMessages.clear();
                 currentConversation = dataSnapshot.getValue(Conversation.class);
-                adapter.clear();
+                //adapter.clear();
 
                 if (currentConversation != null)
                 {
                     currentConversationMessages = (ArrayList<ConversationMessage>) currentConversation.getMessages().clone();
-                    adapter.addAll(currentConversationMessages);
-                    adapter.notifyDataSetChanged();
+                    //adapter.addAll(currentConversationMessages);
+                    //adapter.notifyDataSetChanged();
                 }
             }
 

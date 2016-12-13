@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="local_institution_list">
+        <item>UNT - University of North Texas</item>
+        <item>UTD - University of Texas at Dallas</item>
+        <item>UT - University of Texas at Austin</item>
+        <item>NCTC - North Central Texas College at Corinth</item>
+    </string-array>
+</resources>

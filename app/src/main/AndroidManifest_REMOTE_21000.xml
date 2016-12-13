@@ -4,8 +4,6 @@
     package="com.csce.tutorapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
         android:allowBackup="true"
@@ -46,6 +44,12 @@
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
 
+        <service android:name=".FirebaseMessageService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
         <activity
             android:name=".UserProfileActivity"
             android:label="@string/title_activity_user_profile"
@@ -58,25 +62,6 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ConversationActivity" />
         <activity android:name=".ConversationListActivity" />
-        <activity android:name=".ProfileActivity" />
-        <activity android:name=".FindTutorActivity" />
-        <activity android:name=".SearchResultsActivity" />
-        <activity android:name=".EditProfileActivity"/>
-
-        <service android:name=".ConversationBroadcastReceiver"
-                 android:exported="false"
-                 >
-            <intent-filter>
-                <action android:name="com.csce.tutorapp.ConversationBroadcastReceiver" />
-            </intent-filter>
-        </service>
-
-        <receiver android:name=".StartConvoListenerAtBoot">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-            </intent-filter>
-        </receiver>
-
     </application>
 
 </manifest>

@@ -52,4 +52,8 @@
 
     <!-- home screen activity strings -->
     <string name="home_welcome">Welcome, </string>
+
+    <!-- find tutor screen activity strings -->
+    <string name="insitution_name">Institution</string>
+    <string name="subject_name">Subject</string>
 </resources>

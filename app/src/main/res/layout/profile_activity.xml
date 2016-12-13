@@ -1,146 +1,183 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:weightSum="1">
+    android:weightSum="1"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin">
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:id="@+id/profile_layout_image_name_container"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
 
         <ImageView
             android:id="@+id/profile_image"
             android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="40dp"/>
+            android:layout_height="100dp"/>
+
+        <TextView
+            android:text="First Last"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/name_text"
+            android:layout_weight="1"
+            android:layout_gravity="bottom"
+            android:textSize="24sp"
+            android:layout_marginLeft="10dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/profile_layout_tutor_rating_container"
+        android:layout_below="@id/profile_layout_image_name_container">
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="Tutor Rating "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tutor_rating_text"
+                android:layout_weight=".5"
+                android:textSize="16sp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentStart="true" />
+
+            <RatingBar
+                android:layout_width="wrap_content"
+                android:id="@+id/tutor_rating_bar"
+                android:numStars="5"
+                android:layout_height="45dp"
+                android:rating="0"
+                android:layout_weight=".5"
+                style="@style/Widget.AppCompat.RatingBar.Indicator"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/profile_layout_student_rating_container"
+        android:layout_below="@+id/profile_layout_tutor_rating_container">
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <RatingBar
+                android:layout_width="wrap_content"
+                android:id="@+id/student_rating_bar"
+                android:numStars="5"
+                android:layout_height="45dp"
+                android:rating="0"
+                style="@style/Widget.AppCompat.RatingBar.Indicator"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true" />
+
+            <TextView
+                android:text="Student Rating "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/student_rating_text"
+                android:textSize="16sp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentStart="true" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/profile_layout_subjects_container"
+        android:layout_below="@+id/profile_layout_student_rating_container"
+        android:layout_marginTop="10dp">
+        <TextView
+            android:text="Subjects"
+            android:textStyle="bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/subjects_title_text"
+            android:textSize="16sp"/>
 
         <TextView
             android:text=""
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
-            android:layout_marginLeft="40dp"
-            android:id="@+id/name_text"
-            android:layout_weight="1" />
-
+            android:id="@+id/subjects_text"
+            android:layout_marginTop="10dp" />
     </LinearLayout>
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/profile_layout_about_container"
+        android:layout_below="@+id/profile_layout_subjects_container"
+        android:layout_marginTop="10dp">
+        <TextView
+            android:text="About"
+            android:textStyle="bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/about_title_text"
+            android:textSize="16sp"/>
 
         <TextView
-            android:text="Tutor Rating "
-            android:layout_width="wrap_content"
+            android:text=""
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
-            android:layout_marginTop="15dp"
-            android:id="@+id/tutor_rating_text"
-            android:layout_weight="1" />
-
-        <RatingBar
-            android:layout_width="wrap_content"
-            android:layout_marginRight="30dp"
-            android:layout_marginTop="5dp"
-            android:id="@+id/tutor_rating_bar"
-            android:numStars="5"
-            android:layout_height="45dp"
-            android:rating="0"
-            style="@style/Widget.AppCompat.RatingBar.Indicator" />
+            android:id="@+id/about_text"
+            android:layout_marginTop="10dp"/>
     </LinearLayout>
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:text="Student Rating "
-            android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true">
+        <Button
+            android:text="Send Message"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
-            android:layout_marginTop="15dp"
-            android:id="@+id/student_rating_text"
-            android:layout_weight="1" />
+            android:id="@+id/send_msg_btn"
+            android:layout_gravity="center" />
 
-        <RatingBar
-            android:layout_width="wrap_content"
-            android:layout_marginRight="30dp"
-            android:layout_marginTop="5dp"
-            android:id="@+id/student_rating_bar"
-            android:numStars="5"
-            android:layout_height="45dp"
-            android:rating="0"
-            style="@style/Widget.AppCompat.RatingBar.Indicator" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
+            <Button
+                android:text="Edit Profile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/edit_profile_button"
+                android:layout_weight="0.77" />
+
+            <Button
+                android:text="Home"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/return_home_button"
+                android:layout_weight="1" />
+        </LinearLayout>
     </LinearLayout>
 
-    <TextView
-        android:text="Subjects"
-        android:textStyle="bold"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:id="@+id/subjects_title_text"/>
 
-    <TextView
-        android:text=""
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
-        android:layout_marginTop="10dp"
-        android:id="@+id/subjects_text" />
-
-    <TextView
-        android:text="About"
-        android:textStyle="bold"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"
-        android:id="@+id/about_title_text" />
-
-    <TextView
-        android:text=""
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:id="@+id/about_text"
-        android:layout_weight="0.95" />
-
-    <Button
-        android:text="Send Message"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/send_msg_btn"
-        android:layout_gravity="center" />
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <Button
-            android:text="Edit Profile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/edit_profile_button"
-            android:layout_weight="0.77" />
-
-        <Button
-            android:text="Home"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/return_home_button"
-            android:layout_weight="1" />
-    </LinearLayout>
-
-</LinearLayout>
+</RelativeLayout>
