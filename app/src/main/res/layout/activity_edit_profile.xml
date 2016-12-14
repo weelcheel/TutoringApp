@@ -15,43 +15,49 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_gravity="center"
+        android:weightSum="1">
 
         <CheckBox
             android:text="Math"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="50dp"
             android:id="@+id/math_checkbox"
-            android:layout_weight="1" />
+            android:layout_weight=".3" />
 
         <CheckBox
             android:text="Science"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:id="@+id/science_checkbox"
-            android:layout_weight="1" />
+            android:layout_weight=".3" />
     </LinearLayout>
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_gravity="center"
+        android:weightSum="1">
 
         <CheckBox
             android:text="History"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="50dp"
             android:id="@+id/history_checkbox"
-            android:layout_weight="1" />
+            android:layout_weight=".3" />
 
         <CheckBox
             android:text="English"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:id="@+id/english_checkbox"
-            android:layout_weight="1.2" />
+            android:layout_weight=".3" />
     </LinearLayout>
 
     <LinearLayout

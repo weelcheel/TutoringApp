@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.RatingBar;
 import android.widget.Toast;
@@ -38,6 +39,7 @@ public class ProfileActivity extends AppCompatActivity{
     private RatingBar studentRating, tutorRating;
     private Button editBtn, homeBtn, msgBtn;
     private User signedInUser = new User(FirebaseUtility.getCurrentFirebaseUser().getUid());
+    private LinearLayout contactLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +55,7 @@ public class ProfileActivity extends AppCompatActivity{
         studentRating = (RatingBar) findViewById(R.id.student_rating_bar);
         tutorRating = (RatingBar) findViewById(R.id.tutor_rating_bar);
         msgBtn = (Button) findViewById(R.id.send_msg_btn);
+        contactLayout = (LinearLayout) findViewById(R.id.contact_layout);
 
         String inUser = getIntent().getStringExtra("userid");
 

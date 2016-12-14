@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -14,7 +14,7 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.20">
+        android:layout_alignParentBottom="true">
 
         <Button
             android:text="New Search"
@@ -30,4 +30,4 @@
             android:id="@+id/home_button"
             android:layout_weight="1" />
     </LinearLayout>
-</LinearLayout>
+</RelativeLayout>
