@@ -15,12 +15,23 @@
         android:ems="10"
         android:id="@+id/subject_text_box" />
 
-    <CheckBox
-        android:text="Restrict to Institution"
+    <SeekBar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:id="@+id/restrict_institution_box" />
+        android:id="@+id/radius_seeker"
+        android:max="100" />
+
+    <TextView
+        android:text="Search Radius: 5.5 mile(s)"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/radius_txt"
+        android:paddingTop="20dp" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="33" />
 
     <LinearLayout
         android:orientation="horizontal"

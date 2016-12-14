@@ -17,6 +17,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.SeekBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.geofire.GeoFire;
@@ -36,12 +38,17 @@ import java.util.ArrayList;
 public class FindTutorActivity extends AppCompatActivity {
 
     private EditText searchSubject;
-    private CheckBox restrictInstitution;
     private Button cancelBtn, searchBtn;
     private GeoFire geoFire;
     private ArrayList<String> foundTutorKeys;
+    private SeekBar radiusSeeker;
+    private TextView radiusTxt;
 
     public static int LOCATION_PERMISSION_GRANTED = 710;
+    public static float MILES_TO_KM = 1.60934f;
+    public static int MAX_RADIUS_MILES = 30; //@TODO: maybe make this a setting?
+
+    private float currentRadius; //current radius in kilometers
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +59,8 @@ public class FindTutorActivity extends AppCompatActivity {
         cancelBtn = (Button) findViewById(R.id.cancel_search_button);
         searchBtn = (Button) findViewById(R.id.search_tutor_button);
         searchSubject = (EditText) findViewById(R.id.subject_text_box);
-        restrictInstitution = (CheckBox) findViewById(R.id.restrict_institution_box);
+        radiusSeeker = (SeekBar) findViewById(R.id.radius_seeker);
+        radiusTxt = (TextView) findViewById(R.id.radius_txt);
 
         //initialize geofire
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("activetutors");
@@ -92,7 +100,25 @@ public class FindTutorActivity extends AppCompatActivity {
             }
         });
 
+        radiusSeeker.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                float currentMiles = ((float)progress / 100.f * MAX_RADIUS_MILES);
+                currentRadius = currentMiles * MILES_TO_KM;
 
+                radiusTxt.setText("Search Radius: " + currentMiles + " mile(s)");
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
     }
 
     private void ExecuteTutorSearch(){
@@ -109,7 +135,7 @@ public class FindTutorActivity extends AppCompatActivity {
             final LocationListener locListener = new LocationListener() {
                 @Override
                 public void onLocationChanged(Location location) {
-                    final GeoQuery query = geoFire.queryAtLocation(new GeoLocation(location.getLatitude(), location.getLongitude()), 50);
+                    final GeoQuery query = geoFire.queryAtLocation(new GeoLocation(location.getLatitude(), location.getLongitude()), currentRadius);
                     final LocationListener t = this;
                     query.addGeoQueryEventListener(new GeoQueryEventListener() {
                         @Override
