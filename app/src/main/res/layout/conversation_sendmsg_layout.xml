@@ -11,21 +11,22 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="99" />
+
         <TextView
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="10dp"
-            android:background="@drawable/rounded_corner_rec"
+            android:background="@drawable/rounded_corner_sent"
             android:layout_alignParentEnd="false"
             android:padding="16dp"
             android:text="test test testtest test testtest test testtest test testtest test testtest test testtest test testtest test testtest test testtest test testtest test testtest test testtest test test"
             android:layout_weight="40" />
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="99" />
     </LinearLayout>
 
 </LinearLayout>

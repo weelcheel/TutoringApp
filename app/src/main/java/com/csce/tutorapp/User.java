@@ -21,6 +21,7 @@ public class User implements Parcelable {
     private String firstName;
     private String lastName;
     private String email;
+    private String about;
 
     private String accountType; //whether or not the user is a student or a tutor (or both)
     private ArrayList<String> studentSubjects; //what the user wants to be tutored in as a student
@@ -49,6 +50,7 @@ public class User implements Parcelable {
         lastName = "";
         email = "";
         accountType = "";
+        about = "";
 
         studentSubjects = new ArrayList<>();
         tutorSubjects = new ArrayList<>();
@@ -83,6 +85,8 @@ public class User implements Parcelable {
         return accountType;
     }
 
+    public String getAbout() { return about; }
+
     public ArrayList<String> getStudentSubjects(){
         return studentSubjects;
     }
@@ -102,6 +106,10 @@ public class User implements Parcelable {
     public ArrayList<String> getConversationIDs() { return conversationIDs; }
 
     public boolean getIsProfileCreated() {return isProfileCreated; }
+
+    public void updateSubjects(ArrayList<String> stuSubjects) {studentSubjects = stuSubjects; }
+
+    public void updateAbout(String aboutText) {about = aboutText; }
 
     /* update user profile minimum*/
     public void updateProfile(String fName, String lName, String actType){
@@ -158,4 +166,8 @@ public class User implements Parcelable {
             return new User[size];
         }
     };
+
+    public String toString(){
+        return firstName + " " + lastName;
+    }
 }

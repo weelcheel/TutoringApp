@@ -181,7 +181,7 @@ public class ConversationListActivity extends AppCompatActivity {
                     }
                 });
 
-                builder.show();
+
             }
         });
     }

@@ -22,6 +22,7 @@
         android:gravity="center"
         android:layout_weight="0" />
 
+
     <Button
         android:text="Profile"
         android:layout_width="150dp"
@@ -46,6 +47,7 @@
         android:layout_gravity="center"
         android:id="@+id/convo_button" />
 
+
     <Button
         android:text="Log Out"
         android:layout_width="150dp"
@@ -53,5 +55,13 @@
         android:layout_marginTop="20dp"
         android:layout_gravity="center"
         android:id="@+id/logout_button" />
+
+    <Button
+        android:text="Toggle Active Tutor"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center"
+        android:id="@+id/active_tutor_button" />
 
 </LinearLayout>

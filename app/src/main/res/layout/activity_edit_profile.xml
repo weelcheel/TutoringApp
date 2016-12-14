@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:text="Subjects"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:textSize="20sp"
+        android:id="@+id/subjects_text" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_gravity="center"
+        android:weightSum="1">
+
+        <CheckBox
+            android:text="Math"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/math_checkbox"
+            android:layout_weight=".3" />
+
+        <CheckBox
+            android:text="Science"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/science_checkbox"
+            android:layout_weight=".3" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_gravity="center"
+        android:weightSum="1">
+
+        <CheckBox
+            android:text="History"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/history_checkbox"
+            android:layout_weight=".3" />
+
+        <CheckBox
+            android:text="English"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/english_checkbox"
+            android:layout_weight=".3" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="1">
+
+        <TextView
+            android:text="About"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:textSize="20sp"
+            android:id="@+id/bio_text" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:inputType="textCapSentences|textAutoCorrect|textMultiLine"
+            android:text=""
+            android:scrollHorizontally="false"
+            android:ems="10"
+            android:id="@+id/bio_textEdit"
+            android:layout_weight="13.60" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:text="Save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/save_button"
+            android:layout_weight="1" />
+
+        <Button
+            android:text="Cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/cancel_button"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+
+</LinearLayout>
