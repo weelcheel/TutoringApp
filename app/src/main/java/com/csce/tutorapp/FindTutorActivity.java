@@ -95,28 +95,24 @@ import java.util.ArrayList;
  */
 
 public class FindTutorActivity extends AppCompatActivity {
-    AutoCompleteTextView actvSubject;
     MultiAutoCompleteTextView mactvSubject;
     private static final String TAG = "AnonymousAuth";
 
     private DatabaseReference refDatabase;
-    private DatabaseReference refInstitution;
-    private DatabaseReference refSubject;
-
-    private EditText searchSubject;
-    private CheckBox restrictInstitution;
+    private CheckBox checkboxMale, checkboxFemale;
     private Button btnCancel, btnSearch, btnSun, btnMon, btnTue, btnWed, btnThu, btnFri, btnSat;
+    private static boolean[] boolDaysOfWeek;
+    private static boolean [] boolTutorGender;
 
     // Create adapters for the autocomplete text fields.
     ArrayAdapter<String> adapterSubject;
 
-    BroadcastReceiver brFindTutor;
     private GeoFire geoFire;
     private ArrayList<String> foundTutorKeys;
 
     //Colors
-    int colorGreen;
-    int colorGray;
+    int colorBtnAccent;
+    int colorBtnNorm;
 
     public static int LOCATION_PERMISSION_GRANTED = 710;
 
@@ -127,11 +123,23 @@ public class FindTutorActivity extends AppCompatActivity {
 
         // Load the resources for the layout.
         setContentView(R.layout.find_tutor_activity);
+
         // initialize references
         refDatabase = FirebaseDatabase.getInstance().getReference();
-        refInstitution = refDatabase.child("institution");
-        refSubject = refDatabase.child("subject");
-        // initialize linear layouts
+
+        // initialize arrays
+        boolDaysOfWeek = new boolean[7];
+        boolTutorGender = new boolean[2];
+
+        // initialize checkboxes, and ensure related bool array reflects values
+        checkboxMale = (CheckBox) findViewById(R.id.checkbox_find_tutor_male);
+        checkboxMale.setChecked(true);
+        boolTutorGender[0] = !checkboxMale.isChecked();
+        checkboxFemale = (CheckBox) findViewById(R.id.checkbox_find_tutor_female);
+        checkboxFemale.setChecked(true);
+        boolTutorGender[1] = !checkboxFemale.isChecked();
+
+
         // initialize buttons
         btnSun = (Button) findViewById(R.id.schedule_dayOfWeek_Sunday_button);
         btnMon = (Button) findViewById(R.id.schedule_dayOfWeek_Monday_button);
@@ -142,6 +150,7 @@ public class FindTutorActivity extends AppCompatActivity {
         btnSat = (Button) findViewById(R.id.schedule_dayOfWeek_Saturday_button);
         btnSearch = (Button) findViewById(R.id.button_search_tutor);
         btnCancel = (Button) findViewById(R.id.button_cancel_search);
+
         // initialize text views
         mactvSubject = (MultiAutoCompleteTextView) findViewById(R.id.mactv_subject);
 
@@ -150,8 +159,8 @@ public class FindTutorActivity extends AppCompatActivity {
         geoFire = new GeoFire(ref);
 
         //Colors
-        colorGreen = Color.parseColor("#1e961e");
-        colorGray = Color.parseColor("#b4b4b4");
+        colorBtnAccent = Color.parseColor("#ff4081");
+        colorBtnNorm = Color.parseColor("#d6d7d7");
 
         foundTutorKeys = new ArrayList<>();
 
@@ -161,10 +170,136 @@ public class FindTutorActivity extends AppCompatActivity {
 
     private void createButtonListeners() {
 
-        btnSun .setOnClickListener(new View.OnClickListener() {
+        btnSun.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(!boolDaysOfWeek[0]){
+                    btnSun.setBackgroundColor(colorBtnAccent);
+                    boolDaysOfWeek[0] = true;
+                }
+                else {
+                    btnSun.setBackgroundColor(colorBtnNorm);
+                    boolDaysOfWeek[0] = false;
+                }
 
+            }
+        });
+
+        btnMon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!boolDaysOfWeek[1]){
+                    btnMon.setBackgroundColor(colorBtnAccent);
+                    boolDaysOfWeek[1] = true;
+                }
+                else {
+                    btnMon.setBackgroundColor(colorBtnNorm);
+                    boolDaysOfWeek[1] = false;
+                }
+
+            }
+        });
+
+        btnTue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!boolDaysOfWeek[2]){
+                    btnTue.setBackgroundColor(colorBtnAccent);
+                    boolDaysOfWeek[2] = true;
+                }
+                else {
+                    btnTue.setBackgroundColor(colorBtnNorm);
+                    boolDaysOfWeek[2] = false;
+                }
+
+            }
+        });
+
+        btnWed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!boolDaysOfWeek[3]){
+                    btnWed.setBackgroundColor(colorBtnAccent);
+                    boolDaysOfWeek[3] = true;
+                }
+                else {
+                    btnWed.setBackgroundColor(colorBtnNorm);
+                    boolDaysOfWeek[3] = false;
+                }
+
+            }
+        });
+
+        btnThu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!boolDaysOfWeek[4]){
+                    btnThu.setBackgroundColor(colorBtnAccent);
+                    boolDaysOfWeek[4] = true;
+                }
+                else {
+                    btnThu.setBackgroundColor(colorBtnNorm);
+                    boolDaysOfWeek[4] = false;
+                }
+
+            }
+        });
+
+        btnFri.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!boolDaysOfWeek[5]){
+                    btnFri.setBackgroundColor(colorBtnAccent);
+                    boolDaysOfWeek[5] = true;
+                }
+                else {
+                    btnFri.setBackgroundColor(colorBtnNorm);
+                    boolDaysOfWeek[5] = false;
+                }
+
+            }
+        });
+
+        btnSat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!boolDaysOfWeek[6]){
+                    btnSat.setBackgroundColor(colorBtnAccent);
+                    boolDaysOfWeek[6] = true;
+                }
+                else {
+                    btnSat.setBackgroundColor(colorBtnNorm);
+                    boolDaysOfWeek[6] = false;
+                }
+
+            }
+        });
+
+        checkboxMale.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                if (checkboxMale.isChecked()) {
+                    checkboxMale.setChecked(true);
+                    boolTutorGender[0] = true;
+                }
+                else {
+                    checkboxMale.setChecked(false);
+                    boolTutorGender[0] = false;
+                }
+            }
+        });
+
+        checkboxFemale.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                if (checkboxFemale.isChecked()) {
+                    checkboxFemale.setChecked(true);
+                    boolTutorGender[1] = true;
+                }
+                else {
+                    checkboxFemale.setChecked(false);
+                    boolTutorGender[1] = false;
+                }
             }
         });
 
@@ -196,7 +331,7 @@ public class FindTutorActivity extends AppCompatActivity {
 
     private void getSubjectList() {
         final ArrayList<String> subjectList = new ArrayList<String>();
-        refDatabase.child("institution").addValueEventListener(new ValueEventListener() {
+        refDatabase.child("subject").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot institutions : dataSnapshot.getChildren()) {
@@ -205,6 +340,7 @@ public class FindTutorActivity extends AppCompatActivity {
                 adapterSubject = new ArrayAdapter<String>(FindTutorActivity.this, android.R.layout.simple_list_item_1, subjectList);
                 mactvSubject.setAdapter(adapterSubject);
                 mactvSubject.setThreshold(1);
+                //mactvSubject.showDropDown();
             }
 
             @Override
@@ -212,32 +348,10 @@ public class FindTutorActivity extends AppCompatActivity {
 
             }
         });
-    }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
 
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
-
-    public void onRestart() {
-        super.onRestart();
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-    }
 
     private void ExecuteTutorSearch(){
         int permissionCheck = ContextCompat.checkSelfPermission(FindTutorActivity.this, Manifest.permission.ACCESS_FINE_LOCATION);
@@ -279,6 +393,8 @@ public class FindTutorActivity extends AppCompatActivity {
 
                                 Intent searchResults = new Intent(FindTutorActivity.this, SearchResultsActivity.class);
                                 searchResults.putExtra("foundkeys", foundTutorKeys);
+                                searchResults.putExtra("gendervalues", boolTutorGender);
+                                searchResults.putExtra("daysOfTheWeek", boolDaysOfWeek);
                                 startActivity(searchResults);
                             }
                         }
