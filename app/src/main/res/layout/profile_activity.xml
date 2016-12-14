@@ -164,7 +164,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/send_msg_btn"
                 android:layout_gravity="center"
-                android:layout_weight="1" />
+                android:layout_weight="0.5" />
         </LinearLayout>
 
         <LinearLayout

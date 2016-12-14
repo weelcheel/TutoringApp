@@ -78,8 +78,7 @@ public class SearchResultsActivity extends AppCompatActivity{
         tutorList.setAdapter(listAdapter);
 
         createButtonListeners();
-        fillList();
-
+        //fillList();
     }
 
     private void createButtonListeners ()

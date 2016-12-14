@@ -57,33 +57,6 @@ public class ProfileActivity extends AppCompatActivity{
         msgBtn = (Button) findViewById(R.id.send_msg_btn);
         contactLayout = (LinearLayout) findViewById(R.id.contact_layout);
 
-        //be able to request a tutor session with this tutor if they are active
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("activetutors");
-        ref.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot.hasChild(signedInUser.getID())){
-                    //they are a marked active tutor so add a button
-                    Button sessionButton = new Button(ProfileActivity.this);
-                    sessionButton.setText("Request Session");
-
-                    sessionButton.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            
-                        }
-                    });
-
-                    contactLayout.addView(sessionButton);
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
         String inUser = getIntent().getStringExtra("userid");
 
         final DatabaseReference userProfileDb = FirebaseDatabase.getInstance().getReference("users").child(inUser != null ? inUser : FirebaseUtility.getCurrentFirebaseUser().getUid());
