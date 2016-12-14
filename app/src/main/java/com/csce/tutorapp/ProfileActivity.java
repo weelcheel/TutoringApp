@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.RatingBar;
 import android.widget.Toast;
@@ -38,6 +39,7 @@ public class ProfileActivity extends AppCompatActivity{
     private RatingBar studentRating, tutorRating;
     private Button editBtn, homeBtn, msgBtn;
     private User signedInUser = new User(FirebaseUtility.getCurrentFirebaseUser().getUid());
+    private LinearLayout contactLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +55,34 @@ public class ProfileActivity extends AppCompatActivity{
         studentRating = (RatingBar) findViewById(R.id.student_rating_bar);
         tutorRating = (RatingBar) findViewById(R.id.tutor_rating_bar);
         msgBtn = (Button) findViewById(R.id.send_msg_btn);
+        contactLayout = (LinearLayout) findViewById(R.id.contact_layout);
+
+        //be able to request a tutor session with this tutor if they are active
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("activetutors");
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.hasChild(signedInUser.getID())){
+                    //they are a marked active tutor so add a button
+                    Button sessionButton = new Button(ProfileActivity.this);
+                    sessionButton.setText("Request Session");
+
+                    sessionButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            
+                        }
+                    });
+
+                    contactLayout.addView(sessionButton);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
         String inUser = getIntent().getStringExtra("userid");
 

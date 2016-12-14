@@ -151,12 +151,21 @@
         android:orientation="vertical"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true">
-        <Button
-            android:text="Send Message"
+
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/send_msg_btn"
-            android:layout_gravity="center" />
+            android:layout_height="match_parent"
+            android:id="@+id/contact_layout">
+
+            <Button
+                android:text="Send Message"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/send_msg_btn"
+                android:layout_gravity="center"
+                android:layout_weight="1" />
+        </LinearLayout>
 
         <LinearLayout
             android:orientation="horizontal"
