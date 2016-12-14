@@ -30,59 +30,83 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:paddingLeft="5dp"
-        android:paddingRight="5dp"
-        android:paddingTop="10dp">
+        android:paddingRight="5dp">
 
         <Button
             android:id="@+id/schedule_dayOfWeek_Sunday_button"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
             android:layout_weight=".13"
+            android:layout_margin="3dp"
             android:text="Sun"
-            android:textSize="10dp" />
+            android:textSize="10dp"
+            android:onClick="onClick"
+            android:background="?attr/colorButtonNormal" />
+
         <Button
             android:id="@+id/schedule_dayOfWeek_Monday_button"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
             android:layout_weight=".13"
+            android:layout_height="30dp"
+            android:layout_margin="3dp"
             android:text="Mon"
-            android:textSize="10dp" />
+            android:textSize="10dp"
+            android:onClick="onClick"
+            android:background="?attr/colorButtonNormal" />
+
         <Button
             android:id="@+id/schedule_dayOfWeek_Tuesday_button"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
             android:layout_weight=".13"
+            android:layout_margin="3dp"
             android:text="Tue"
-            android:textSize="10dp" />
+            android:textSize="10dp"
+            android:onClick="onClick"
+            android:background="?attr/colorButtonNormal" />
+
         <Button
             android:id="@+id/schedule_dayOfWeek_Wednesday_button"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
             android:layout_weight=".13"
+            android:layout_margin="3dp"
             android:text="Wed"
-            android:textSize="10dp" />
+            android:textSize="10dp"
+            android:onClick="onClick"
+            android:background="?attr/colorButtonNormal" />
+
         <Button
             android:id="@+id/schedule_dayOfWeek_Thursday_button"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
             android:layout_weight=".13"
+            android:layout_margin="3dp"
             android:text="Thu"
-            android:textSize="10dp" />
+            android:textSize="10dp"
+            android:onClick="onClick"
+            android:background="?attr/colorButtonNormal" />
+
         <Button
             android:id="@+id/schedule_dayOfWeek_Friday_button"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
             android:layout_weight=".13"
+            android:layout_margin="3dp"
             android:text="Fri"
-            android:textSize="10dp" />
+            android:textSize="10dp"
+            android:onClick="onClick"
+            android:background="?attr/colorButtonNormal" />
         <Button
             android:id="@+id/schedule_dayOfWeek_Saturday_button"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
             android:layout_weight=".13"
+            android:layout_margin="3dp"
             android:text="Sat"
             android:textSize="10dp"
-            android:onClick="onClick"/>
+            android:onClick="onClick"
+            android:background="?attr/colorButtonNormal"/>
 
     </LinearLayout>
 
@@ -107,7 +131,9 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_marginTop="8dp"
-            android:id="@+id/ratingbar_minimum" />
+            android:id="@+id/ratingbar_minimum"
+            android:layout_marginLeft="5dp"
+            android:stepSize="0.5" />
     </LinearLayout>
 
     <LinearLayout
@@ -123,15 +149,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <CheckBox
+                android:id="@+id/checkbox_find_tutor_male"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="M"
                 android:checked="true" />
+
             <CheckBox
+                android:id="@+id/checkbox_find_tutor_female"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="F"
-                android:checked="true"/>
+                android:checked="true" />
         </LinearLayout>
 
     </LinearLayout>
